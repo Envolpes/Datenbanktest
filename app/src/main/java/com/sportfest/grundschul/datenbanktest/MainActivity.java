@@ -32,62 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
     String json_string;
 
-    //Deklaration Variablen Sprung
-    EditText Satz1, Satz2, Satz3, Springer;
-    Button Springen;
-    RequestQueue requestQueue;
-    //URL Location
-    String insertURL = "http://91.67.242.37/json_insert.php";
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Refernzierung der Felder
-
-        Satz1 = (EditText) findViewById(R.id.Satz1);
-        Satz2 = (EditText) findViewById(R.id.Satz2);
-        Satz3 = (EditText) findViewById(R.id.Satz3);
-        Springer= (EditText) findViewById(R.id.Springer);
-        Springen = (Button) findViewById(R.id.springen);
-
-        requestQueue = Volley.newRequestQueue(getApplicationContext());
-
-        Springen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                StringRequest request = new StringRequest(Request.Method.POST, insertURL,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }){
-
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String,String> parameters = new HashMap<String, String>();
-                        parameters.put("Springer", Springer.getText().toString());
-                        parameters.put("Satz1", Satz1.getText().toString());
-                        parameters.put("Satz2", Satz2.getText().toString());
-                        parameters.put("Satz3", Satz3.getText().toString());
-
-                        return parameters;
-                    }
-                };
-                requestQueue.add(request);
-
-            }
-        });
 
     }
 
