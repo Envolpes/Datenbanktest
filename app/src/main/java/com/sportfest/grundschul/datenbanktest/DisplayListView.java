@@ -1,7 +1,10 @@
 package com.sportfest.grundschul.datenbanktest;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -47,16 +50,26 @@ public class DisplayListView extends AppCompatActivity {
                 datenAdapter.add(daten);
 
                 count++;
-
-
-
-
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent= new Intent(getApplicationContext(), SecondActivity.class);
 
+                //intent.putExtra("Coutryname" , listView.getItemAtPosition(position).toString());
+                try {
+                    intent.putExtra("Coutryname", jsonArray.get(position).toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                startActivity(intent);
+            }
+        });
 
     }
 }
