@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DisplayListView" />
-        <activity android:name=".SecondActivity"></activity>
+        <activity android:name=".SecondActivity" />
+        <activity android:name=".Login"></activity>
     </application>
 
 </manifest>
