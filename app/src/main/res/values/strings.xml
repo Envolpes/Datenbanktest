@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">Datenbanktest</string>
+    <string name="app_name">V6.0</string>
+    <string name="logout_name">LogOut</string>
+    <string name="aboutus_name">About Us</string>
+    <string name="help_name">Help</string>
+
+    <string-array name="DropdownKlassen">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+
+    </string-array>
+
+    <string-array name="DropdownUnterklassen">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+
+    </string-array>
 </resources>

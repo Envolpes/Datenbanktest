@@ -3,76 +3,76 @@
     android:layout_width="match_parent" android:layout_height="75dp">
 
     <TextView
-        android:layout_width="50dp"
-        android:layout_height="match_parent"
         android:id="@+id/tx_nummer"
+        android:layout_width="59dp"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
-        android:text="Nummer"
         android:gravity="center"
-        android:textAppearance="?android:textAppearanceLarge"
-        />
+        android:text="Nummer"
+        android:textAppearance="?android:textAppearanceLarge" />
 
     <TextView
-        android:layout_width="50dp"
-        android:layout_height="match_parent"
         android:id="@+id/tx_klasse"
+        android:layout_width="55dp"
+        android:layout_height="match_parent"
         android:layout_toRightOf="@id/tx_nummer"
-        android:text="Nummer"
         android:gravity="center"
-        android:textAppearance="?android:textAppearanceLarge"
-        />
+        android:text="Nummer"
+        android:textAppearance="?android:textAppearanceLarge" />
 
     <TextView
-        android:layout_width="50dp"
-        android:layout_height="match_parent"
         android:id="@+id/tx_unterklasse"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_toRightOf="@id/tx_klasse"
-        android:text="Nummer"
         android:gravity="center"
-        android:textAppearance="?android:textAppearanceLarge"
-        />
+        android:text="Nummer"
+        android:textAppearance="?android:textAppearanceLarge" />
 
     <TextView
-        android:layout_width="120dp"
-        android:layout_height="match_parent"
         android:id="@+id/tx_name"
+        android:layout_width="15dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
         android:layout_toRightOf="@id/tx_unterklasse"
-        android:text="Nummer"
         android:gravity="center"
-        android:textAppearance="?android:textAppearanceLarge"
-        />
+        android:text="Nummer"
+        android:textAppearance="?android:textAppearanceLarge" />
 
     <TextView
         android:id="@+id/h_name"
-        android:layout_width="120dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/tx_unterklasse"
+        android:layout_marginStart="2dp"
+        android:layout_toEndOf="@+id/h_unterklasse"
         android:text="Name" />
 
     <TextView
         android:id="@+id/h_unterklasse"
-        android:layout_width="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/tx_klasse"
-        android:text="Unter-Klasse" />
+        android:layout_marginStart="-1dp"
+        android:layout_toEndOf="@+id/h_klasse"
+        android:text="Unter-Klasse | " />
 
     <TextView
         android:id="@+id/h_klasse"
-        android:layout_width="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/tx_nummer"
-        android:text="Klasse" />
+        android:layout_toEndOf="@+id/h_nummer"
+        android:text="Klasse | " />
 
     <TextView
         android:id="@+id/h_nummer"
-        android:layout_width="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Nummer" />
+        android:text="Nummer | " />
 
 
 </RelativeLayout>

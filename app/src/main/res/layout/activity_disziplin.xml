@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Disziplin">
+
+    <include
+        layout = "@layout/toolbar"
+        android:id="@+id/toolbarBasis">
+    </include>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="371dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnWeitsprung"
+            android:layout_width="match_parent"
+            android:layout_height="104dp"
+            android:textSize="30sp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="272dp"
+            android:background="#e7e247"
+            android:onClick="parseJSON"
+            android:text="Weitsprung" />
+
+        <Button
+            android:id="@+id/btnSchwimmen"
+            android:layout_width="match_parent"
+            android:layout_height="104dp"
+            android:textSize="30sp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="156dp"
+            android:background="#e7e247"
+            android:text="Schwimmen" />
+
+        <Button
+            android:id="@+id/btnSprint"
+            android:layout_width="match_parent"
+            android:layout_height="104dp"
+            android:textSize="30sp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
+            android:background="#e7e247"
+            android:text="Sprint" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/KlassenauswahlLayout"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:background="#e7e247"
+
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarBasis"
+        app:layout_constraintVertical_bias="0.594">
+
+        <TextView
+            android:id="@+id/txtKlasse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Klasse:"
+            android:textSize="40sp" />
+
+        <Spinner
+            android:id="@+id/btnDropdownKlassen"
+            android:layout_width="99dp"
+            android:layout_height="51dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/txtKlasse" />
+
+        <Spinner
+            android:id="@+id/btnDropdownUnterklassen"
+            android:layout_width="99dp"
+            android:layout_height="51dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/btnDropdownKlassen" />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

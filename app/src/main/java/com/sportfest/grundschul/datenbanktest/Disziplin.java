@@ -4,19 +4,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,29 +19,65 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
-
+public class Disziplin extends Menue {
+    private Button btnWeitsprung, btnSchwimmen, btnSprint;
     String json_string;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        getJSON(null);
-        parseJSON(null);
-    }
+        setContentView(R.layout.activity_disziplin);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBasis);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Spinner dropdown = (Spinner) findViewById(R.id.btnDropdownKlassen);
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Disziplin.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownKlassen));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dropdown.setAdapter(myAdapter);
+
+        Spinner dropdownU = (Spinner) findViewById(R.id.btnDropdownUnterklassen);
+        ArrayAdapter<String> myAdapterU = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownUnterklassen));
+        myAdapterU.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dropdownU.setAdapter(myAdapterU);
+
+        btnWeitsprung = findViewById(R.id.btnWeitsprung);
+        btnSchwimmen = findViewById(R.id.btnSchwimmen);
+        btnSprint = findViewById(R.id.btnSprint);
+
+        //btnWeitsprung.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+          //  public void onClick(View v) {
+            //    Intent gotToWeitsprung = new Intent(getApplicationContext(), DisplayListView.class);
+              //  startActivity(gotToWeitsprung);
+           // }
+       // });
+
+        btnSchwimmen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Schwimmen ausgewählt", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnSprint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Sprint ausgewählt", Toast.LENGTH_SHORT).show();
+            }
+        });
+        getJSON(null);
+    }
 
     public void getJSON(View view) {
 
-    new BackgroundTask().execute();
+        new Disziplin.BackgroundTask().execute();
 
     }
 
-    class BackgroundTask extends AsyncTask<Void, Void, String>{
+    class BackgroundTask extends AsyncTask<Void, Void, String> {
 
         String json_url;
         String JSON_STRING;
@@ -97,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            TextView textView = (TextView) findViewById(R.id.textView);
-            textView.setText(result);
+            //TextView textView = (TextView) findViewById(R.id.textView);
+            //textView.setText(result);
             json_string= result;
 
         }
@@ -117,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("json_data", json_string);
             startActivity(intent);
         }
-
 
     }
 }
