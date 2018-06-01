@@ -11,19 +11,21 @@ import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
 
-    private EditText txtUserName, txtPassword;
-    private TextView txtView1;
-    private Button btnLogIn;
+    EditText txtUserName, txtPassword;
+    TextView txtView1;
+    Button btnLogIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
+
+
 
         txtUserName = (EditText) findViewById(R.id.txtUsername);
-        txtUserName.setText("Nehemia");
+        //txtUserName.setText("Nehemia");
         txtPassword = (EditText)   findViewById(R.id.txtPassword);
-        txtPassword.setText("1234");
+        //txtPassword.setText("1234");
         txtView1 = (TextView) findViewById(R.id.txtView1);
         btnLogIn = findViewById(R.id.btnLogIn);
 
