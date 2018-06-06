@@ -1,5 +1,6 @@
 package com.sportfest.grundschul.datenbanktest;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,11 +14,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DisplayListView extends Menue {
+
+    //Deklaration der Variablen
     String json_string;
+    Boolean nochmal;
     JSONObject jsonObject;
     JSONArray jsonArray;
     DatenAdapter datenAdapter;
     ListView listView;
+
 
 
     @Override
@@ -35,7 +40,10 @@ public class DisplayListView extends Menue {
 
         //Hier wird "json_data" von MainAcitivity zu DisplayListView übergeben
         json_string = getIntent().getExtras().getString("json_data");
+
         try {
+
+            //JSON String wird in Object und Array geschrieben
             jsonObject = new JSONObject(json_string);
             jsonArray = new JSONObject(json_string).getJSONArray("server_response");
             int count =0;
@@ -44,6 +52,7 @@ public class DisplayListView extends Menue {
 
             while(count < jsonArray.length()){
 
+                //JSON Array wird ausgelesen und in die Variablen geschrieben
                 JSONObject JO = jsonArray.getJSONObject(count);
 
                 nummer = JO.getString("nummer");
@@ -60,14 +69,16 @@ public class DisplayListView extends Menue {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        //Click auf Schülernamen
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent= new Intent(getApplicationContext(), SecondActivity.class);
 
-                //intent.putExtra("Coutryname" , listView.getItemAtPosition(position).toString());
-                try {
-                    intent.putExtra("Coutryname", jsonArray.get(position).toString());
+                //SecondActivity mit Schüler wird aufgerufen
+               try {
+                    intent.putExtra("Schueler", jsonArray.get(position).toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -2,6 +2,7 @@ package com.sportfest.grundschul.datenbanktest;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -21,11 +22,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Disziplin extends Menue {
-    private Button btnWeitsprung, btnSchwimmen, btnSprint;
+    private Button btnWeitsprung, btnSchwimmen, btnSprint, btnBestätigen;
     String json_string;
+    String Klasse = "1";
+    String UnterKlasse = "A";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disziplin);
 
@@ -33,12 +36,12 @@ public class Disziplin extends Menue {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Spinner dropdown = (Spinner) findViewById(R.id.btnDropdownKlassen);
+        final Spinner dropdown = (Spinner) findViewById(R.id.btnDropdownKlassen);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Disziplin.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownKlassen));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdown.setAdapter(myAdapter);
 
-        Spinner dropdownU = (Spinner) findViewById(R.id.btnDropdownUnterklassen);
+        final Spinner dropdownU = (Spinner) findViewById(R.id.btnDropdownUnterklassen);
         ArrayAdapter<String> myAdapterU = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownUnterklassen));
         myAdapterU.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdownU.setAdapter(myAdapterU);
@@ -46,14 +49,31 @@ public class Disziplin extends Menue {
         btnWeitsprung = findViewById(R.id.btnWeitsprung);
         btnSchwimmen = findViewById(R.id.btnSchwimmen);
         btnSprint = findViewById(R.id.btnSprint);
+        btnBestätigen = findViewById(R.id.GetKlasse);
 
-        //btnWeitsprung.setOnClickListener(new View.OnClickListener() {
+
+
+        btnBestätigen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnWeitsprung.setOnClickListener(new View.OnClickListener() {
         //    @Override
-          //  public void onClick(View v) {
+            public void onClick(View v) {
             //    Intent gotToWeitsprung = new Intent(getApplicationContext(), DisplayListView.class);
               //  startActivity(gotToWeitsprung);
-           // }
-       // });
+
+                Klasse = dropdown.getSelectedItem().toString();
+                UnterKlasse = dropdownU.getSelectedItem().toString();
+                //BackgroundTask asyncTask = new BackgroundTask(Klasse, UnterKlasse);
+
+                getJSON(Klasse,UnterKlasse);
+
+            }
+        });
 
         btnSchwimmen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,12 +88,11 @@ public class Disziplin extends Menue {
                 Toast.makeText(getApplicationContext(), "Sprint ausgewählt", Toast.LENGTH_SHORT).show();
             }
         });
-        getJSON(null);
     }
 
-    public void getJSON(View view) {
+    public void getJSON(String Klasse, String UnterKlasse) {
 
-        new Disziplin.BackgroundTask().execute();
+        new Disziplin.BackgroundTask(Klasse,UnterKlasse).execute();
 
     }
 
@@ -82,39 +101,51 @@ public class Disziplin extends Menue {
         String json_url;
         String JSON_STRING;
 
+        private String Klasse = "1";
+        private String UnterKlasse = "A";
 
 
+        public BackgroundTask(String Klasse, String UnterKlasse){
+
+            this.Klasse = Klasse;
+            this.UnterKlasse= UnterKlasse;
+
+        }
         @Override
         protected void onPreExecute() {
-            //Hier wird der JSON aufgerufen
-            json_url="http://91.67.242.37/json_get_data.php";
-        }
+                 }
 
         @Override
         protected String doInBackground(Void... voids) {
+            //Hier wird die JSON-URL aufgebaut
+            json_url="http://91.67.242.37/json_get_data_schulklasse.php?klasse=" +Klasse+"&unterklasse="+UnterKlasse;
             try {
+
+                //URL Link wir genutzt, um HTTP Connection herzustellen
                 URL url = new URL(json_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 StringBuilder stringBuilder = new StringBuilder();
+
+                //STRING wird aus den Lines des bufferedReader gelesen und in JSON_String geschrieben
                 while((JSON_STRING = bufferedReader.readLine())!= null){
 
                     stringBuilder.append(JSON_STRING+"\n");
                 }
 
+                //Schließen der Connections
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
                 return stringBuilder.toString().trim();
 
-
+                //Notwendige Try/Catch Bedingungen
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
 
             return null;
         }
@@ -127,26 +158,15 @@ public class Disziplin extends Menue {
 
         @Override
         protected void onPostExecute(String result) {
-            //TextView textView = (TextView) findViewById(R.id.textView);
-            //textView.setText(result);
+
+            //JSON Stirng wird mit übergebener Variabel befüllt
+            //und daraufhin DisplayListView-Klasse mit dem Extra "json_string" aufgerufen
             json_string= result;
-
-        }
-    }
-
-
-    public void parseJSON(View view) {
-
-        if(json_string==null){
-            Toast.makeText(getApplicationContext(), "First get JSON", Toast.LENGTH_LONG).show();
-
-        }
-        else{
-
-            Intent intent = new Intent (this, DisplayListView.class);
+            Intent intent = new Intent ( getApplicationContext(), DisplayListView.class);
             intent.putExtra("json_data", json_string);
             startActivity(intent);
-        }
 
+        }
     }
+
 }

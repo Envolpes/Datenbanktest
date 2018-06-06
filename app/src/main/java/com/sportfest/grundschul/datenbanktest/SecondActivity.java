@@ -45,7 +45,7 @@ public class SecondActivity extends Menue {
 
         Bundle bundle = getIntent().getExtras();
         Gson gson = new Gson();
-        String jsonInString = bundle.getString("Coutryname");
+        String jsonInString = bundle.getString("Schueler");
         Daten user = gson.fromJson(jsonInString, Daten.class);
 
 
@@ -55,8 +55,7 @@ public class SecondActivity extends Menue {
         Nummer = (TextView) findViewById(R.id.Nummer);
         UKlasse = (TextView) findViewById(R.id.unterklasse);
 
-
-
+        //Daten werden vorbefüllt
 
         Klasse.setText(user.getKlasse());
         Name.setText(user.getName());
@@ -110,9 +109,8 @@ public class SecondActivity extends Menue {
                 requestQueue.add(request);
 
 
-                //Sprung in MainAcitivity
-
-                startActivity(new Intent(SecondActivity.this, MainActivity.class));
+                //Sprung in ListView
+                finish();
 
             }
         });

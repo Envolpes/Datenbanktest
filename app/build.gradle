@@ -28,4 +28,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     // für Insertion
     compile 'com.mcxiaoke.volley:library:1.0.18'
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+
 }
