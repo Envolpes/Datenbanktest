@@ -118,3 +118,10 @@ public class SecondActivity extends Menue {
 
     }
 }
+/*ToDo:
+// -Man darf nicht 0 eingeben - NeTu
+// -Falls Werte vorhanden sind, sollen diese dort erscheinen - NeTu / Mawe
+//          -JSON String, welcher vorhandene Daten schickt - MaWe
+            -Die Daten sollen in den Feldern eingefügt werden - NeTu/(MaWe)
+
+*/

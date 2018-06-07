@@ -49,16 +49,6 @@ public class Disziplin extends Menue {
         btnWeitsprung = findViewById(R.id.btnWeitsprung);
         btnSchwimmen = findViewById(R.id.btnSchwimmen);
         btnSprint = findViewById(R.id.btnSprint);
-        btnBestätigen = findViewById(R.id.GetKlasse);
-
-
-
-        btnBestätigen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         btnWeitsprung.setOnClickListener(new View.OnClickListener() {
         //    @Override
