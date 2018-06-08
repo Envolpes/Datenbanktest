@@ -6,17 +6,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class Statistik1 extends Menue {
     private Button btnWeitsprung, btnSchwimmen, btnSprint, btnBestätigen;
     String json_string;
     String Klasse = "1";
     String UnterKlasse = "A";
+    private RadioGroup radiogroupSex;
+    private RadioButton radioSexButton;
+    TextView AuswahlCheckbox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistik1);
+        addListenerOnButton();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBasis);
         setSupportActionBar(toolbar);
@@ -41,6 +49,24 @@ public class Statistik1 extends Menue {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+    }
+
+    //Male Female Button Control
+    public void addListenerOnButton() {
+        radiogroupSex = (RadioGroup) findViewById(R.id.radiogroupSex);
+        AuswahlCheckbox = (TextView) findViewById(R.id.auswah);
+        btnWeitsprung = findViewById(R.id.btnWeitsprung);
+        btnWeitsprung.setOnClickListener(new View.OnClickListener() {
+            //    @Override
+            public void onClick(View v) {
+                // get selected radio button from radioGroup
+                int selectedId = radiogroupSex.getCheckedRadioButtonId();
+                // find the radiobutton by returned id
+                radioSexButton = (RadioButton) findViewById(selectedId);
+                Toast.makeText(Statistik1.this, radioSexButton.getText(), Toast.LENGTH_SHORT).show();
+                AuswahlCheckbox.setText(radioSexButton.getText());
             }
         });
     }
