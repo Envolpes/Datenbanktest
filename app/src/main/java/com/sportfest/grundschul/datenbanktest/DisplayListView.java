@@ -8,10 +8,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DisplayListView extends Menue {
 
@@ -22,6 +27,9 @@ public class DisplayListView extends Menue {
     JSONArray jsonArray;
     DatenAdapter datenAdapter;
     ListView listView;
+    Array x;
+
+
 
 
 
@@ -86,6 +94,34 @@ public class DisplayListView extends Menue {
                 startActivity(intent);
             }
         });
+       /* try {
+            jsonArray = new JSONObject(json_string).getJSONArray("server_response");
+            List<String> list = new ArrayList<String>();
+            for (int i=0; i<jsonArray.length(); i++) {
+                list.add( jsonArray.getString(i) );
+            }
+            Toast.makeText(getApplicationContext(),list.get(0), Toast.LENGTH_LONG).show();
+
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }*/
+try {
+    JSONObject JO = jsonArray.getJSONObject(1);
+    String nummer, klasse, unterklasse, name;
+
+    nummer = JO.getString("nummer");
+    klasse = JO.getString("klasse");
+    unterklasse = JO.getString("unterklasse");
+    name = JO.getString("name");
+
+    Daten daten = new Daten(nummer, klasse, unterklasse, name);
+    Toast.makeText(getApplicationContext(),daten.getNummer(), Toast.LENGTH_LONG).show();
+
+}
+catch (JSONException e) {
+    e.printStackTrace();
+}
 
     }
 }
