@@ -25,7 +25,7 @@ public class Home extends Menue {
         btnStatistik.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotToStatistik = new Intent(getApplicationContext(), Statistik.class);
+                Intent gotToStatistik = new Intent(getApplicationContext(), Statistik1.class);
                 startActivity(gotToStatistik);
             }
         });

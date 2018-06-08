@@ -11,36 +11,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
         <activity android:name=".MainActivity" />
-
         <activity android:name=".Menue" />
-
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Home" />
-
-            <activity
-                android:name=".Statistik"
-                android:parentActivityName=".Home"/>
-
-            <activity
-                android:name=".Disziplin"
-                android:parentActivityName=".Home"/>
-
-                <activity
-                    android:name=".DisplayListView"
-                    android:parentActivityName=".Disziplin"/>
-
-                    <activity
-                        android:name=".SecondActivity"
-                        android:parentActivityName=".Disziplin"/>
-
+        <activity
+            android:name=".Statistik"
+            android:parentActivityName=".Home" />
+        <activity
+            android:name=".Disziplin"
+            android:parentActivityName=".Home" />
+        <activity
+            android:name=".DisplayListView"
+            android:parentActivityName=".Disziplin" />
+        <activity
+            android:name=".SecondActivity"
+            android:parentActivityName=".Disziplin" />
+        <activity
+            android:name=".Statistik1"
+            android:parentActivityName=".Home"></activity>
     </application>
 
 </manifest>
