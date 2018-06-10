@@ -105,22 +105,4 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
-
-    public void parseJSON(View view) {
-
-        if(json_string==null){
-            Toast.makeText(getApplicationContext(), "First get JSON", Toast.LENGTH_LONG).show();
-
-        }
-        else{
-
-            Intent intent = new Intent (this, DisplayListView.class);
-            intent.putExtra("json_data", json_string);
-            startActivity(intent);
-        }
-
-
-    }
-
 }
