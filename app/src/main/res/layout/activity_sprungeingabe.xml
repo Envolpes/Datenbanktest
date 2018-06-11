@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecondActivity">
+    tools:context=".SprungEingabe">
 
     <include
         layout = "@layout/toolbar"
@@ -158,7 +158,6 @@
             android:layout_width="335dp"
             android:layout_height="78dp"
             android:layout_marginTop="8dp"
-            android:text="TextView"
             app:layout_constraintTop_toBottomOf="@+id/springen"
             tools:layout_editor_absoluteX="18dp" />
     </android.support.constraint.ConstraintLayout>

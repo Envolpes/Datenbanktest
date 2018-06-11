@@ -3,6 +3,7 @@ package com.sportfest.grundschul.datenbanktest;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,6 +40,18 @@ public class Menue extends AppCompatActivity {
             default:
 
         }
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void ToolbarEinfügen (){
+        //Toolbar einfügen
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBasis);
+        setSupportActionBar(toolbar);
+        //Zurück-Button einfügen
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }

@@ -20,7 +20,7 @@ public class DatenAdapter extends ArrayAdapter {
     }
 
 
-    public void add(Daten object) {
+    public void add(PersonenDaten object) {
         super.add(object);
         list.add(object);
     }
@@ -66,11 +66,11 @@ public class DatenAdapter extends ArrayAdapter {
         }
 
 
-        Daten daten = (Daten) this.getItem(position);
-        datenHolder.tx_nummer.setText(daten.getNummer());
-        datenHolder.tx_klasse.setText(daten.getKlasse());
-        datenHolder.tx_unterklasse.setText(daten.getUnterklasse());
-        datenHolder.tx_name.setText(daten.getName());
+        PersonenDaten personenDaten = (PersonenDaten) this.getItem(position);
+        datenHolder.tx_nummer.setText(personenDaten.getNummer());
+        datenHolder.tx_klasse.setText(personenDaten.getKlasse());
+        datenHolder.tx_unterklasse.setText(personenDaten.getUnterklasse());
+        datenHolder.tx_name.setText(personenDaten.getName());
         return row;
     }
 

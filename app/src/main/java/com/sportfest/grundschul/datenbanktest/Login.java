@@ -21,12 +21,9 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-
+        //Referenzieren der Felder
         txtUserName = (EditText) findViewById(R.id.txtUsername);
-        //txtUserName.setText("Nehemia");
         txtPassword = (EditText)   findViewById(R.id.txtPassword);
-        //txtPassword.setText("1234");
         txtView1 = (TextView) findViewById(R.id.txtView1);
         btnLogIn = findViewById(R.id.btnLogIn);
 

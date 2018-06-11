@@ -1,10 +1,10 @@
 package com.sportfest.grundschul.datenbanktest;
 
-public class Daten {
+public class PersonenDaten {
 
     private String nummer, klasse, unterklasse, name;
 
-    public Daten(String nummer, String klasse, String unterklasse, String name){
+    public PersonenDaten(String nummer, String klasse, String unterklasse, String name){
 
         this.setNummer(nummer);
         this.setKlasse(klasse);

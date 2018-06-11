@@ -1,8 +1,6 @@
 package com.sportfest.grundschul.datenbanktest;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,8 +13,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DisplayListView extends Menue {
 
@@ -67,9 +63,9 @@ public class DisplayListView extends Menue {
                 klasse = JO.getString("klasse");
                 unterklasse = JO.getString("unterklasse");
                 name = JO.getString("name");
-                Daten daten = new Daten(nummer, klasse, unterklasse, name);
+                PersonenDaten personenDaten = new PersonenDaten(nummer, klasse, unterklasse, name);
 
-                datenAdapter.add(daten);
+                datenAdapter.add(personenDaten);
 
                 count++;
             }
@@ -82,9 +78,9 @@ public class DisplayListView extends Menue {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent= new Intent(getApplicationContext(), SecondActivity.class);
+                Intent intent= new Intent(getApplicationContext(), SprungEingabe.class);
 
-                //SecondActivity mit Schüler wird aufgerufen
+                //SprungEingabe mit Schüler wird aufgerufen
                try {
                     intent.putExtra("Schueler", jsonArray.get(position).toString());
                 } catch (JSONException e) {
@@ -115,8 +111,8 @@ try {
     unterklasse = JO.getString("unterklasse");
     name = JO.getString("name");
 
-    Daten daten = new Daten(nummer, klasse, unterklasse, name);
-    Toast.makeText(getApplicationContext(),daten.getNummer(), Toast.LENGTH_LONG).show();
+    PersonenDaten personenDaten = new PersonenDaten(nummer, klasse, unterklasse, name);
+    Toast.makeText(getApplicationContext(), personenDaten.getNummer(), Toast.LENGTH_LONG).show();
 
 }
 catch (JSONException e) {
