@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,7 +34,7 @@ import java.util.Map;
 
 public class SprungEingabe extends Menue {
     //Deklaration der Textboxen
-    TextView Name, Klasse, Nummer, UKlasse;
+    TextView Name, Klasse, Nummer, UKlasse, Änderung;
 
     //Deklaration Variablen Sprung
     EditText Satz1, Satz2, Satz3;
@@ -69,14 +70,16 @@ public class SprungEingabe extends Menue {
                 Satz1 = (EditText) findViewById(R.id.Satz1);
                 String satz1 = Satz1.getText().toString();
 
-                Satz2 = (EditText) findViewById(R.id.Satz1);
-                String satz2 = Satz1.getText().toString();
+                Satz2 = (EditText) findViewById(R.id.Satz2);
+                String satz2 = Satz2.getText().toString();
 
-                Satz3 = (EditText) findViewById(R.id.Satz1);
-                String satz3 = Satz1.getText().toString();
+                Satz3 = (EditText) findViewById(R.id.Satz3);
+                String satz3 = Satz3.getText().toString();
+
+                String modus = Änderung.getText().toString();
 
                 //GET-String zur Übertragung der Daten
-                insertURL = insertURL + "?Springer="+Nummer.getText().toString()+"&Satz1="+satz1+"&Satz2="+satz2+"&Satz3="+satz3;
+                insertURL = insertURL + "?Springer="+Nummer.getText().toString()+"&Satz1="+satz1+"&Satz2="+satz2+"&Satz3="+satz3 + "&Neu="+modus;
 
                 SpringerDatenSpeichern();
 
@@ -160,6 +163,12 @@ public class SprungEingabe extends Menue {
                 Satz3 = (EditText) findViewById(R.id.Satz3);
                 Satz3.setText(Sprünge.getString("Satz3"));
 
+
+                //Textview Änderung bei Vorbefüllung
+
+                if(Satz1.getText().toString()!=null){
+                    Änderung.setText("Änderungsmodus");
+                }
             }
             catch (JSONException e) {
                 e.printStackTrace();
@@ -190,6 +199,9 @@ public class SprungEingabe extends Menue {
 
         UKlasse = (TextView) findViewById(R.id.unterklasse);
         UKlasse.setText(user.getUnterklasse());
+
+        Änderung = (TextView) findViewById(R.id.Änderung);
+        Änderung.setText("Neu");
 
         //Startnumemrnvariable bereitstellen, nicht nötig da background task direkt aufgerufen werden kann
         //String StNummer = user.getNummer();
