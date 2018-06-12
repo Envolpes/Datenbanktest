@@ -64,6 +64,10 @@ public class SprungEingabe extends Menue {
             @Override
             public void onClick(View view) {
 
+                //GET-String zur Übertragung der Daten
+
+                insertURL = insertURL + "?Springer="+Nummer.getText().toString()+"&Satz1="+Satz1.getText().toString()+"&Satz2="+Satz2.getText().toString()+"&Satz3="+Satz3.getText().toString();
+
                 SpringerDatenSpeichern();
 
                 //Sprung in ListView
@@ -189,8 +193,8 @@ public class SprungEingabe extends Menue {
     private void SpringerDatenSpeichern(){
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-        //POST Methode, um Weiten zur DB zu schicken
-        StringRequest request = new StringRequest(Request.Method.POST, insertURL,
+        //GET Methode, um Weiten zur DB zu schicken
+        StringRequest request = new StringRequest(Request.Method.GET, insertURL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -203,23 +207,22 @@ public class SprungEingabe extends Menue {
 
                     }
                 }
-        )
-        {
-            @Override
-            //Werte, die geschickt werden
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> parameters = new HashMap<String, String>();
-                parameters.put("Springer", Nummer.getText().toString());
-                parameters.put("Satz1", Satz1.getText().toString());
-                parameters.put("Satz2", Satz2.getText().toString());
-                parameters.put("Satz3", Satz3.getText().toString());
-
-                return parameters;
-            }
-        };
+        );
 
         // Einfügen des Einfügen in die Warteschlange
         requestQueue.add(request);
+
+
+
+        try {
+
+            URL url = new URL(insertURL);
+            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
