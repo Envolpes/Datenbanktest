@@ -64,9 +64,19 @@ public class SprungEingabe extends Menue {
             @Override
             public void onClick(View view) {
 
-                //GET-String zur Übertragung der Daten
+                //Initialisierung, falls noch nicht vorbefüllt
 
-                insertURL = insertURL + "?Springer="+Nummer.getText().toString()+"&Satz1="+Satz1.getText().toString()+"&Satz2="+Satz2.getText().toString()+"&Satz3="+Satz3.getText().toString();
+                Satz1 = (EditText) findViewById(R.id.Satz1);
+                String satz1 = Satz1.getText().toString();
+
+                Satz2 = (EditText) findViewById(R.id.Satz1);
+                String satz2 = Satz1.getText().toString();
+
+                Satz3 = (EditText) findViewById(R.id.Satz1);
+                String satz3 = Satz1.getText().toString();
+
+                //GET-String zur Übertragung der Daten
+                insertURL = insertURL + "?Springer="+Nummer.getText().toString()+"&Satz1="+satz1+"&Satz2="+satz2+"&Satz3="+satz3;
 
                 SpringerDatenSpeichern();
 
