@@ -267,4 +267,5 @@ public class SprungEingabe extends Menue {
 //          -JSON String, welcher vorhandene PersonenDaten schickt - MaWe
             -Die PersonenDaten sollen in den Feldern eingefügt werden - NeTu/(MaWe)
 
+----
 */
