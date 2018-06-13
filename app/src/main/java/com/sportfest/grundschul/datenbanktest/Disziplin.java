@@ -2,7 +2,6 @@ package com.sportfest.grundschul.datenbanktest;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -46,7 +44,7 @@ public class Disziplin extends Menue {
         myAdapterU.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdownU.setAdapter(myAdapterU);
 
-        btnWeitsprung = findViewById(R.id.btnWeitsprung);
+        btnWeitsprung = findViewById(R.id.btnWeitsprung_Bester);
         btnSchwimmen = findViewById(R.id.btnSchwimmen);
         btnSprint = findViewById(R.id.btnSprint);
 

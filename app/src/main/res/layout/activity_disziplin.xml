@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/btnWeitsprung"
+            android:id="@+id/btnWeitsprung_Bester"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#e7e247"
@@ -34,7 +34,7 @@
             android:id="@+id/btnSchwimmen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnWeitsprung"
+            android:layout_below="@+id/btnWeitsprung_Bester"
             android:background="#e7e247"
             android:text="Schwimmen"
             android:textSize="30sp" />

@@ -21,6 +21,17 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
 
+        <Button
+            android:id="@+id/btnWeitsprung_Beste"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/auswah"
+            android:background="#e7e247"
+            android:onClick="BesteSpruenge"
+            android:text="Beste Sprünge"
+            android:textSize="14sp" />
+
         <TextView
             android:id="@+id/auswah"
             android:layout_width="wrap_content"
@@ -32,13 +43,14 @@
             tools:layout_editor_absoluteY="167dp" />
 
         <Button
-            android:id="@+id/btnWeitsprung"
-            android:layout_width="match_parent"
+            android:id="@+id/btnWeitsprung_Bester"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:layout_centerVertical="true"
+            android:layout_alignTop="@+id/auswah"
             android:background="#e7e247"
-            android:text="Weitsprung"
-            android:textSize="30sp" />
+            android:onClick="BesterSprung"
+            android:text="Bester Sprung"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/btnSchwimmen"
