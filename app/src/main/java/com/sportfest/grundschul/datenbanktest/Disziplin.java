@@ -1,6 +1,7 @@
 package com.sportfest.grundschul.datenbanktest;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class Disziplin extends Menue {
     String json_string;
     String Klasse = "1";
     String UnterKlasse = "A";
+    Spinner dropdown, dropdownU;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,15 +36,19 @@ public class Disziplin extends Menue {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final Spinner dropdown = (Spinner) findViewById(R.id.btnDropdownKlassen);
+        SharedPreferences Spinnerauswahl = getSharedPreferences("Auswahlspinner",0);
+
+        dropdown = (Spinner) findViewById(R.id.btnDropdownKlassen);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Disziplin.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownKlassen));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdown.setAdapter(myAdapter);
+        dropdown.setSelection(Spinnerauswahl.getInt("AusgewählterIndexDropdown",0));
 
-        final Spinner dropdownU = (Spinner) findViewById(R.id.btnDropdownUnterklassen);
+        dropdownU = (Spinner) findViewById(R.id.btnDropdownUnterklassen);
         ArrayAdapter<String> myAdapterU = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownUnterklassen));
         myAdapterU.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdownU.setAdapter(myAdapterU);
+        dropdownU.setSelection(Spinnerauswahl.getInt("AusgewählterIndexDropdownU",0));
 
         btnWeitsprung = findViewById(R.id.btnWeitsprung_Bester);
         btnSchwimmen = findViewById(R.id.btnSchwimmen);
@@ -155,6 +161,16 @@ public class Disziplin extends Menue {
             startActivity(intent);
 
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SharedPreferences Spinnerauswahl = getSharedPreferences("Auswahlspinner",0);
+        SharedPreferences.Editor editor = Spinnerauswahl.edit();
+        editor.putInt("AusgewählterIndexDropdown",dropdown.getSelectedItemPosition());
+        editor.putInt("AusgewählterIndexDropdownU",dropdownU.getSelectedItemPosition());
+        editor.commit();
     }
 
 }

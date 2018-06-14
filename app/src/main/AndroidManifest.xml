@@ -11,10 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity"></activity>
 
-        <activity android:name=".Menue" />
-        <activity android:name=".Login">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".Menue"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Login"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,22 +29,29 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Home" />
+        <activity
+            android:name=".Home"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Statistik"
-            android:parentActivityName=".Home" />
+            android:parentActivityName=".Home"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Disziplin"
-            android:parentActivityName=".Home" />
+            android:parentActivityName=".Home"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".DisplayListView"
-            android:parentActivityName=".Disziplin" />
+            android:parentActivityName=".Disziplin"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SprungEingabe"
-            android:parentActivityName=".Disziplin" />
+            android:parentActivityName=".Disziplin"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Statistik1"
-            android:parentActivityName=".Home"></activity>
+            android:parentActivityName=".Home"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

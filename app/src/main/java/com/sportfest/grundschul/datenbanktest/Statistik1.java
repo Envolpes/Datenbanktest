@@ -1,5 +1,6 @@
 package com.sportfest.grundschul.datenbanktest;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class Statistik1 extends Menue {
     private RadioGroup radiogroupSex;
     private RadioButton radioSexButton;
     TextView AuswahlCheckbox;
+    Spinner dropdown, dropdownU;
 
     //FÜR JSON STRING
     String befehl;
@@ -48,15 +50,19 @@ public class Statistik1 extends Menue {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final Spinner dropdown = (Spinner) findViewById(R.id.btnDropdownKlassen);
+        SharedPreferences SpinnerAuswahl = getSharedPreferences("AuswahlSpinner",0);
+
+        dropdown = (Spinner) findViewById(R.id.btnDropdownKlassen);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownKlassenStatistik));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdown.setAdapter(myAdapter);
+        dropdown.setSelection(SpinnerAuswahl.getInt("AusgewählterIndexDropdown",0));
 
-        final Spinner dropdownU = (Spinner) findViewById(R.id.btnDropdownUnterklassen);
+        dropdownU = (Spinner) findViewById(R.id.btnDropdownUnterklassen);
         ArrayAdapter<String> myAdapterU = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownUnterklassenStatistik));
         myAdapterU.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdownU.setAdapter(myAdapterU);
+        dropdownU.setSelection(SpinnerAuswahl.getInt("AusgewählterIndexDropdownU",0));
 
         btnBester = findViewById(R.id.btnWeitsprung_Bester);
         btnBesteSpruenge = findViewById(R.id.btnWeitsprung_Beste);
@@ -67,6 +73,7 @@ public class Statistik1 extends Menue {
         btnBesteSpruenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 new Statistik1.BackgroundTask("beste_sprunge.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString()).execute();
             }
         });
@@ -74,6 +81,7 @@ public class Statistik1 extends Menue {
         btnBester.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 new Statistik1.BackgroundTask("bester.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString()).execute();
             }
         });
@@ -172,7 +180,13 @@ public class Statistik1 extends Menue {
         }
     }
 
-
-
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SharedPreferences SpinnerAuswahl = getSharedPreferences("AuswahlSpinner",0);
+        SharedPreferences.Editor editor = SpinnerAuswahl.edit();
+        editor.putInt("AusgewählterIndexDropdown",dropdown.getSelectedItemPosition());
+        editor.putInt("AusgewählterIndexDropdownU",dropdownU.getSelectedItemPosition());
+        editor.commit();
+    }
 }
