@@ -82,7 +82,7 @@ public class SprungEingabe extends Menue {
                 insertURL = insertURL + "?Springer="+Nummer.getText().toString()+"&Satz1="+satz1+"&Satz2="+satz2+"&Satz3="+satz3 + "&Neu="+modus;
 
                 SpringerDatenSpeichern();
-                
+
                 //Sprung in ListView
                 finish();
             }
