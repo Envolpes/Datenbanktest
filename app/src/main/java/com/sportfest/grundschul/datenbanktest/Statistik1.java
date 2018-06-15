@@ -1,5 +1,6 @@
 package com.sportfest.grundschul.datenbanktest;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -169,6 +170,10 @@ public class Statistik1 extends Menue {
         protected void onPostExecute(String result) {
             //Hier hast den String Nehemia
             JSON_STRING=result;
+            Intent intent = new Intent ( getApplicationContext(), DisplayListViewStatistik.class);
+            intent.putExtra("json_data", JSON_STRING);
+            startActivity(intent);
+
         }
     }
 

@@ -38,6 +38,9 @@
         <activity
             android:name=".Statistik1"
             android:parentActivityName=".Home"></activity>
+        <activity
+            android:name=".DisplayListViewStatistik"
+            android:parentActivityName=".Home"></activity>
     </application>
 
 </manifest>

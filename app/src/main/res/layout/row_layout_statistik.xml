@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:gravity="center"
-        android:text="Nummer"
+        android:text="Weite"
         android:textAppearance="?android:textAppearanceLarge" />
 
     <TextView
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Nummer | " />
+        android:text="Weite | " />
 
 
 </RelativeLayout>
