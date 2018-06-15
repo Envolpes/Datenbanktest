@@ -3,6 +3,7 @@ package com.sportfest.grundschul.datenbanktest;
 public class SprungDaten {
     private String nummer, sprung1, sprung2, sprung3;
 
+    //Constructor, um Nummer und Sprünge zu bekommen
     public SprungDaten (String nummer, String sprung1, String sprung2, String sprung3){
 
         this.setNummer(nummer);
@@ -12,6 +13,8 @@ public class SprungDaten {
 
     }
 
+
+    //GETter- und SETter-Methoden
     public String getNummer() {
         return nummer;
     }

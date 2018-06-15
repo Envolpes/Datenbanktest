@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             json_url="http://91.67.242.37/json_get_data.php";
         }
 
+        //HTML-Connection wird aufgebaut und in mit STRING BUILDER in JSON_String geschrieben
         @Override
         protected String doInBackground(Void... voids) {
             try {
@@ -98,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
+
+            //DisplayListView wird mit RESULT (STRING aus doInBackground) befüllt
             TextView textView = (TextView) findViewById(R.id.textView);
             textView.setText(result);
             json_string= result;

@@ -27,6 +27,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Statistik1 extends Menue {
+
+    //Dekleration + STandardparameter
     private Button btnBester,btnBesteSpruenge, btnSchwimmen, btnSprint, btnBestätigen;
     String json_string;
     String Klasse = "1";
@@ -45,26 +47,30 @@ public class Statistik1 extends Menue {
         setContentView(R.layout.activity_statistik1);
         addListenerOnButton();
 
+        //Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBasis);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //DropDown1
         final Spinner dropdown = (Spinner) findViewById(R.id.btnDropdownKlassen);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownKlassenStatistik));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdown.setAdapter(myAdapter);
 
+        //DropDown2
         final Spinner dropdownU = (Spinner) findViewById(R.id.btnDropdownUnterklassen);
         ArrayAdapter<String> myAdapterU = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownUnterklassenStatistik));
         myAdapterU.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdownU.setAdapter(myAdapterU);
 
+        //Zuweisen der Buttons
         btnBester = findViewById(R.id.btnWeitsprung_Bester);
         btnBesteSpruenge = findViewById(R.id.btnWeitsprung_Beste);
         btnSchwimmen = findViewById(R.id.btnSchwimmen);
         btnSprint = findViewById(R.id.btnSprint);
-        btnBestätigen = findViewById(R.id.GetKlasse);
 
+        //OnCLickListener für Buttons + Übergabe GET_Methode
         btnBesteSpruenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,14 +85,6 @@ public class Statistik1 extends Menue {
             }
         });
 
-
-        //Kann man löschen
-        btnBestätigen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     //Male Female Button Control
@@ -107,16 +105,17 @@ public class Statistik1 extends Menue {
         });
     }
 
-
+    //JSON_String für übergabe in ListView
     class BackgroundTask extends AsyncTask<Void, Void, String> {
 
+        //Variablen
         String json_url;
         String befehl;
         String JSON_STRING;
         String klasse;
         String unterklasse;
 
-
+        //Constructor, um Strings aus der Klasse zu bekommen
         public BackgroundTask(String befehl, String klasse, String unterklasse){
 
             this.befehl= befehl;
@@ -129,6 +128,7 @@ public class Statistik1 extends Menue {
         protected void onPreExecute() {
         }
 
+        //HTML-Connection + StringBuilder
         @Override
         protected String doInBackground(Void... voids) {
             json_url ="http://91.67.242.37/" + befehl+"?klasse="+klasse+"&unterklasse="+unterklasse;
@@ -166,6 +166,7 @@ public class Statistik1 extends Menue {
         }
 
 
+        //DisplayListViewStatistik wird mit den daten JSON_STRING aufgerufen
         @Override
         protected void onPostExecute(String result) {
             //Hier hast den String Nehemia

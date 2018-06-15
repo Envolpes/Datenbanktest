@@ -4,6 +4,7 @@ public class PersonenDatenStatistik {
 
     private String weite, klasse, unterklasse, name;
 
+    //Constructor für setDaten
     public PersonenDatenStatistik(String weite, String klasse, String unterklasse, String name){
 
         this.setWeite(weite);
@@ -13,8 +14,7 @@ public class PersonenDatenStatistik {
 
     }
 
-
-
+    //GETter und SETter_Methoden
     public String getWeite() {
         return weite;
     }

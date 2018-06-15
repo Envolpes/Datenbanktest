@@ -46,9 +46,11 @@ public class DatenAdapterStatistik extends ArrayAdapter {
 
         if(row == null){
 
+            //Inflator wird benutzt, damit DisplayListViewStatistik von unten reinhuscht
             LayoutInflater layoutInflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = layoutInflater.inflate(R.layout.row_layout_statistik, parent, false);
 
+            //Hier werden die Felder der Reihe festgelegt
             datenHolder = new DatenHolder();
             datenHolder.tx_weite = (TextView) row.findViewById(R.id.tx_weite);
             datenHolder.tx_klasse = (TextView) row.findViewById(R.id.tx_klasse);
@@ -65,7 +67,7 @@ public class DatenAdapterStatistik extends ArrayAdapter {
             datenHolder = (DatenHolder)row.getTag();
         }
 
-
+        //Hier werden die Daten aus PersonenDatenStatistik geholt und in die Felder geschrieben
         PersonenDatenStatistik personenDaten = (PersonenDatenStatistik) this.getItem(position);
         datenHolder.tx_weite.setText(personenDaten.getWeite());
         datenHolder.tx_klasse.setText(personenDaten.getKlasse());
@@ -76,6 +78,7 @@ public class DatenAdapterStatistik extends ArrayAdapter {
 
     static class DatenHolder{
 
+        //Felder der DatenHolder
         TextView tx_weite,tx_klasse, tx_unterklasse, tx_name;
 
     }

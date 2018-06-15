@@ -33,15 +33,17 @@ public class DisplayListViewStatistik extends Menue {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display_listview_layout);
 
+        //Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBasis);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //Verknüpfen mit row_layout_statistik
         listView = (ListView)findViewById(R.id.listview);
         datenAdapter = new DatenAdapterStatistik(this,R.layout.row_layout_statistik);
         listView.setAdapter(datenAdapter);
 
-        //Hier wird "json_data" von MainAcitivity zu DisplayListView übergeben
+        //Hier wird "json_data" von Statistik1 zu DisplayListViewSTatistik übergeben
         json_string = getIntent().getExtras().getString("json_data");
 
         try {
@@ -50,7 +52,6 @@ public class DisplayListViewStatistik extends Menue {
             jsonObject = new JSONObject(json_string);
             jsonArray = new JSONObject(json_string).getJSONArray("server_response");
             int count =0;
-            //Ab hier ändndern auf Beste Sprünge
             String weite, klasse, unterklasse, name;
 
 
@@ -63,8 +64,11 @@ public class DisplayListViewStatistik extends Menue {
                 name = JO.getString("Springer");
                 klasse = JO.getString("Klasse");
                 unterklasse = JO.getString("UnterKlasse");
+
+                //Daten werden in PersonenDatenStatistik gespeichert
                 PersonenDatenStatistik personenDaten = new PersonenDatenStatistik(weite, klasse, unterklasse, name);
 
+                //DatenAdapterStatistik bekommt die Informationen, welche wir eben in PersonenDatenStatistik gespeichert haben
                 datenAdapter.add(personenDaten);
 
                 count++;

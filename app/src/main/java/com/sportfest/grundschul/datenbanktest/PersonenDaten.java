@@ -4,6 +4,7 @@ public class PersonenDaten {
 
     private String nummer, klasse, unterklasse, name;
 
+    //Constructor
     public PersonenDaten(String nummer, String klasse, String unterklasse, String name){
 
         this.setNummer(nummer);
@@ -13,8 +14,7 @@ public class PersonenDaten {
 
     }
 
-
-
+    //GETter- und SETter-MEthoden
     public String getNummer() {
         return nummer;
     }
