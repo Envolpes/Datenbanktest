@@ -67,14 +67,14 @@ public class Statistik1 extends Menue {
         btnBesteSpruenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Statistik1.BackgroundTask("beste_sprunge.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString()).execute();
+                new Statistik1.BackgroundTask("beste_sprunge.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString(), radioSexButton.getText().toString()).execute();
             }
         });
 
         btnBester.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Statistik1.BackgroundTask("bester.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString()).execute();
+                new Statistik1.BackgroundTask("bester.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString(), radioSexButton.getText().toString() ).execute();
             }
         });
 
@@ -114,13 +114,15 @@ public class Statistik1 extends Menue {
         String JSON_STRING;
         String klasse;
         String unterklasse;
+        String geschlecht;
 
 
-        public BackgroundTask(String befehl, String klasse, String unterklasse){
+        public BackgroundTask(String befehl, String klasse, String unterklasse, String geschlecht){
 
             this.befehl= befehl;
             this.klasse = klasse;
             this.unterklasse= unterklasse;
+            this.geschlecht = geschlecht;
 
         }
 
@@ -130,7 +132,7 @@ public class Statistik1 extends Menue {
 
         @Override
         protected String doInBackground(Void... voids) {
-            json_url ="http://91.67.242.37/" + befehl+"?klasse="+klasse+"&unterklasse="+unterklasse;
+            json_url ="http://91.67.242.37/" + befehl+"?klasse="+klasse+"&unterklasse="+unterklasse + "&geschlecht=" + geschlecht;
 
             try {
                 URL url = new URL(json_url);
