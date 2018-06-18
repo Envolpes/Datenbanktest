@@ -7,16 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".Home">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        android:alpha="0.75"
-        android:scaleType="centerCrop"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarBasis"
-        app:srcCompat="@mipmap/sportplatz" />
-
     <include
         layout = "@layout/toolbar"
         android:id="@+id/toolbarBasis">

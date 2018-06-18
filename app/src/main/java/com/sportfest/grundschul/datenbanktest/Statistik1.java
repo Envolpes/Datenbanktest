@@ -109,6 +109,7 @@ public class Statistik1 extends Menue {
                 // find the radiobutton by returned id
                 radioSexButton = (RadioButton) findViewById(selectedId);
                 Toast.makeText(Statistik1.this, radioSexButton.getText(), Toast.LENGTH_SHORT).show();
+                //Hier um den Text für Radiobutton zu bekommen
                 AuswahlCheckbox.setText(radioSexButton.getText());
             }
         });

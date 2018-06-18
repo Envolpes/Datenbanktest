@@ -1,12 +1,15 @@
 package com.sportfest.grundschul.datenbanktest;
 
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,7 +17,16 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Array;
 
-public class DisplayListView extends Menue {
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class DisplayListViewFragment extends Fragment {
+
+
+    public DisplayListViewFragment() {
+        // Required empty public constructor
+    }
 
     //Deklaration der Variablen
     String json_string;
@@ -25,25 +37,18 @@ public class DisplayListView extends Menue {
     ListView listView;
     Array x;
 
-
-
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.display_listview_layout);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBasis);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        View FrameLayout = inflater.inflate(R.layout.fragment_display_list_view, container, false);
 
-        listView = (ListView)findViewById(R.id.listview);
-        datenAdapter = new DatenAdapter(this,R.layout.row_layout);
+        listView = (ListView)FrameLayout.findViewById(R.id.listview);
+        datenAdapter = new DatenAdapter(getContext(),R.layout.row_layout);
         listView.setAdapter(datenAdapter);
 
         //Hier wird "json_data" von MainAcitivity zu DisplayListView übergeben
-        json_string = getIntent().getExtras().getString("json_data");
+        json_string = getActivity().getIntent().getExtras().getString("json_data");
 
         try {
 
@@ -78,10 +83,10 @@ public class DisplayListView extends Menue {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent= new Intent(getApplicationContext(), SprungEingabe.class);
+                Intent intent= new Intent(getContext(), SprungEingabe.class);
 
                 //SprungEingabe mit Schüler wird aufgerufen
-               try {
+                try {
                     intent.putExtra("Schueler", jsonArray.get(position).toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -90,34 +95,27 @@ public class DisplayListView extends Menue {
                 startActivity(intent);
             }
         });
-       /* try {
-            jsonArray = new JSONObject(json_string1).getJSONArray("server_response");
-            List<String> list = new ArrayList<String>();
-            for (int i=0; i<jsonArray.length(); i++) {
-                list.add( jsonArray.getString(i) );
-            }
-            Toast.makeText(getApplicationContext(),list.get(0), Toast.LENGTH_LONG).show();
+
+        try {
+            JSONObject JO = jsonArray.getJSONObject(1);
+            String nummer, klasse, unterklasse, name;
+
+            nummer = JO.getString("nummer");
+            klasse = JO.getString("klasse");
+            unterklasse = JO.getString("unterklasse");
+            name = JO.getString("name");
+
+            PersonenDaten personenDaten = new PersonenDaten(nummer, klasse, unterklasse, name);
+            //Toast.makeText(getApplicationContext(), personenDaten.getNummer(), Toast.LENGTH_LONG).show();
 
         }
         catch (JSONException e) {
             e.printStackTrace();
-        }*/
-try {
-    JSONObject JO = jsonArray.getJSONObject(1);
-    String nummer, klasse, unterklasse, name;
+        }
 
-    nummer = JO.getString("nummer");
-    klasse = JO.getString("klasse");
-    unterklasse = JO.getString("unterklasse");
-    name = JO.getString("name");
 
-    PersonenDaten personenDaten = new PersonenDaten(nummer, klasse, unterklasse, name);
-    //Toast.makeText(getApplicationContext(), personenDaten.getNummer(), Toast.LENGTH_LONG).show();
-
-}
-catch (JSONException e) {
-    e.printStackTrace();
-}
-
+        // Inflate the layout for this fragment
+        return FrameLayout;
     }
+
 }

@@ -154,7 +154,7 @@ public class Disziplin extends Menue {
         protected void onPostExecute(String result) {
 
             //JSON Stirng wird mit übergebener Variabel befüllt
-            //und daraufhin DisplayListView-Klasse mit dem Extra "json_string" aufgerufen
+            //und daraufhin DisplayListView-Klasse mit dem Extra "json_string1" aufgerufen
             json_string= result;
             Intent intent = new Intent ( getApplicationContext(), DisplayListView.class);
             intent.putExtra("json_data", json_string);

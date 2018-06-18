@@ -1,73 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DisziplinFragment">
 
-    <RelativeLayout
-        android:id="@+id/KlassenauswahlLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:background="@color/colorAccentTransparent"
-
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarBasis"
-        app:layout_constraintVertical_bias="0.594">
-
-        <TextView
-            android:id="@+id/txtKlasse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Klasse:"
-            android:textSize="35sp" />
-
-        <Spinner
-            android:id="@+id/btnDropdownKlassen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/txtKlasse" />
-
-        <Spinner
-            android:id="@+id/btnDropdownUnterklassen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/btnDropdownKlassen" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/relativeLayout"
+        <RelativeLayout
+            android:id="@+id/KlassenauswahlLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp"
+
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/buttonContainer"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/txtKlasse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Klasse:"
+                android:textSize="35sp" />
+
+            <Spinner
+                android:id="@+id/btnDropdownKlassen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/txtKlasse"
+                android:popupBackground="@color/colorAccent" />
+
+            <Spinner
+                android:id="@+id/btnDropdownUnterklassen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/btnDropdownKlassen"
+                android:popupBackground="@color/colorAccent" />
+
+        </RelativeLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/buttonContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="84dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <Button
                 android:id="@+id/btn_Weitsprung"
-                android:layout_width="160dip"
-                android:layout_height="160dip"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignTop="@+id/btn_Speerwurf"
-                android:background="@color/colorAccentTransparent"
+                android:background="@color/colorPrimary"
                 android:text="Weitsprung"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="0dp"></Button>
@@ -75,11 +76,11 @@
             <Button
                 android:id="@+id/btn_Schwimmen"
                 android:layout_width="160dip"
-                android:layout_height="160dip"
+                android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/btn_Weitsprung"
                 android:layout_alignTop="@+id/btn_Sprint"
                 android:layout_marginStart="176dp"
-                android:background="@color/colorAccentTransparent"
+                android:background="@color/colorPrimary"
                 android:text="Schwimmen"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"></Button>
@@ -87,11 +88,11 @@
             <Button
                 android:id="@+id/btn_Speerwurf"
                 android:layout_width="160dip"
-                android:layout_height="160dip"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="176dp"
                 android:layout_marginTop="16dp"
-                android:background="@color/colorAccentTransparent"
+                android:background="@color/colorPrimary"
                 android:text="Speerwurf"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_Schwimmen"></Button>
@@ -99,16 +100,47 @@
             <Button
                 android:id="@+id/btn_Sprint"
                 android:layout_width="160dip"
-                android:layout_height="160dip"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignStart="@+id/btn_Speerwurf"
                 android:layout_marginTop="16dp"
-                android:background="@color/colorAccentTransparent"
+                android:background="@color/colorPrimary"
                 android:text="Sprint"
                 app:layout_constraintTop_toBottomOf="@+id/btn_Weitsprung"></Button>
 
         </android.support.constraint.ConstraintLayout>
 
-    </RelativeLayout>
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_uberschrift"
+            app:layout_constraintVertical_bias="0.0">
+
+        </ListView>
+
+        <TextView
+            android:id="@+id/txt_uberschrift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonContainer" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
 
 </FrameLayout>

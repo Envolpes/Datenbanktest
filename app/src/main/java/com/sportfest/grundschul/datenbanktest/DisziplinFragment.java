@@ -1,6 +1,5 @@
 package com.sportfest.grundschul.datenbanktest;
 
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -9,35 +8,48 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
+
 public class DisziplinFragment extends Fragment {
 
+    private Button btn_Weitsprung, btn_Schwimmen, btn_Sprint, btn_Speerwurf;
+    Spinner dropdownKlassen, dropdownUnterklassen;
+    String Klasse, UnterKlasse, json_string1;
+    private FrameLayout SchülerListe;
+    private DisplayListViewFragment Listview;
+    JSONObject jsonObject;
+    JSONArray jsonArray;
+    DatenAdapter datenAdapter;
+    ListView listView;
+    TextView txt_Überschrift;
 
     public DisziplinFragment() {
         // Required empty public constructor
     }
-
-    private Button btn_Weitsprung, btn_Schwimmen, btn_Sprint, btn_Speerwurf;
-    Spinner dropdownKlassen, dropdownUnterklassen;
-    String Klasse = "1";
-    String UnterKlasse = "A";
-    String json_string;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +58,10 @@ public class DisziplinFragment extends Fragment {
 
         SharedPreferences Spinnerauswahl = getActivity().getSharedPreferences("Auswahlspinner",0);
 
+        //SchülerListe = (FrameLayout) activeLayout.findViewById(R.id.schülerliste_frame);
+        Listview = new DisplayListViewFragment();
+
+        txt_Überschrift= activeLayout.findViewById(R.id.txt_uberschrift);
 
         dropdownKlassen = (Spinner) activeLayout.findViewById(R.id.btnDropdownKlassen);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownKlassen));
@@ -116,8 +132,8 @@ public class DisziplinFragment extends Fragment {
         String json_url;
         String JSON_STRING;
 
-        private String Klasse = "1";
-        private String UnterKlasse = "A";
+        private String Klasse;
+        private String UnterKlasse;
 
 
         public BackgroundTask(String Klasse, String UnterKlasse){
@@ -175,12 +191,81 @@ public class DisziplinFragment extends Fragment {
         protected void onPostExecute(String result) {
 
             //JSON Stirng wird mit übergebener Variabel befüllt
-            //und daraufhin DisplayListView-Klasse mit dem Extra "json_string" aufgerufen
-            json_string= result;
-            Intent intent = new Intent ( getContext(), DisplayListView.class);
-            intent.putExtra("json_data", json_string);
-            startActivity(intent);
+            //und daraufhin DisplayListView-Klasse mit dem Extra "json_string1" aufgerufen
+            json_string1 = result;
 
+            listView = (ListView)getActivity().findViewById(R.id.listview);
+            datenAdapter = new DatenAdapter(getContext(),R.layout.row_layout);
+            listView.setAdapter(datenAdapter);
+
+            try {
+
+                //JSON String wird in Object und Array geschrieben
+                jsonObject = new JSONObject(json_string1);
+                jsonArray = new JSONObject(json_string1).getJSONArray("server_response");
+                int count =0;
+                String nummer, klasse, unterklasse, name;
+
+
+                while(count < jsonArray.length()){
+
+                    //JSON Array wird ausgelesen und in die Variablen geschrieben
+                    JSONObject JO = jsonArray.getJSONObject(count);
+
+                    nummer = JO.getString("nummer");
+                    klasse = JO.getString("klasse");
+                    unterklasse = JO.getString("unterklasse");
+                    name = JO.getString("name");
+                    PersonenDaten personenDaten = new PersonenDaten(nummer, klasse, unterklasse, name);
+
+                    datenAdapter.add(personenDaten);
+
+                    count++;
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            if(jsonArray.length() ==0){
+                txt_Überschrift.setText("Diese Klasse enthält keine Schüler");
+            }else{
+                txt_Überschrift.setText("Schüler der Klasse "+Klasse +UnterKlasse);
+            }
+
+            //Click auf Schülernamen
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent= new Intent(getContext(), SprungEingabe.class);
+
+                    //SprungEingabe mit Schüler wird aufgerufen
+                    try {
+                        intent.putExtra("Schueler", jsonArray.get(position).toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    startActivity(intent);
+                }
+            });
+
+            try {
+                JSONObject JO = jsonArray.getJSONObject(1);
+                String nummer, klasse, unterklasse, name;
+
+                nummer = JO.getString("nummer");
+                klasse = JO.getString("klasse");
+                unterklasse = JO.getString("unterklasse");
+                name = JO.getString("name");
+
+                PersonenDaten personenDaten = new PersonenDaten(nummer, klasse, unterklasse, name);
+                //Toast.makeText(getApplicationContext(), personenDaten.getNummer(), Toast.LENGTH_LONG).show();
+
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 

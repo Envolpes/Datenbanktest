@@ -5,4 +5,6 @@
     <color name="colorAccent">#5c80bc</color>
 
     <color name="colorAccentTransparent">#d95c80bc</color>
+    <color name="Background">#000000</color>
+
 </resources>
