@@ -125,19 +125,19 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Klasse:"
-            android:textSize="40sp" />
+            android:textSize="25sp" />
 
         <Spinner
             android:id="@+id/btnDropdownKlassen"
-            android:layout_width="99dp"
-            android:layout_height="51dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/txtKlasse" />
 
         <Spinner
             android:id="@+id/btnDropdownUnterklassen"
-            android:layout_width="99dp"
-            android:layout_height="51dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/btnDropdownKlassen" />
 

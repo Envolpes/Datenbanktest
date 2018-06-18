@@ -16,7 +16,6 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="371dp"
-        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -26,24 +25,30 @@
             android:id="@+id/btnWeitsprung_Bester"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="26dp"
             android:background="#e7e247"
             android:text="Weitsprung"
             android:textSize="30sp" />
 
         <Button
             android:id="@+id/btnSchwimmen"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnWeitsprung_Bester"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="139dp"
             android:background="#e7e247"
             android:text="Schwimmen"
             android:textSize="30sp" />
 
         <Button
             android:id="@+id/btnSprint"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnSchwimmen"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="111dp"
             android:background="#e7e247"
             android:text="Sprint"
             android:textSize="30sp" />
@@ -76,15 +81,15 @@
 
         <Spinner
             android:id="@+id/btnDropdownKlassen"
-            android:layout_width="99dp"
-            android:layout_height="51dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/txtKlasse" />
 
         <Spinner
             android:id="@+id/btnDropdownUnterklassen"
-            android:layout_width="99dp"
-            android:layout_height="51dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/btnDropdownKlassen" />
 

@@ -1,12 +1,14 @@
 package com.sportfest.grundschul.datenbanktest;
 
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -20,48 +22,56 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Disziplin extends Menue {
-    private Button btnWeitsprung, btnSchwimmen, btnSprint, btnBestätigen;
-    String json_string;
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class DisziplinFragment extends Fragment {
+
+
+    public DisziplinFragment() {
+        // Required empty public constructor
+    }
+
+    private Button btn_Weitsprung, btn_Schwimmen, btn_Sprint, btn_Speerwurf;
+    Spinner dropdownKlassen, dropdownUnterklassen;
     String Klasse = "1";
     String UnterKlasse = "A";
-    Spinner dropdown, dropdownU;
+    String json_string;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_disziplin);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBasis);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        View activeLayout = inflater.inflate(R.layout.fragment_disziplin, container, false);
 
-        SharedPreferences Spinnerauswahl = getSharedPreferences("Auswahlspinner",0);
+        SharedPreferences Spinnerauswahl = getActivity().getSharedPreferences("Auswahlspinner",0);
 
-        dropdown = (Spinner) findViewById(R.id.btnDropdownKlassen);
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Disziplin.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownKlassen));
+
+        dropdownKlassen = (Spinner) activeLayout.findViewById(R.id.btnDropdownKlassen);
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownKlassen));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dropdown.setAdapter(myAdapter);
-        dropdown.setSelection(Spinnerauswahl.getInt("AusgewählterIndexDropdown",0));
+        dropdownKlassen.setAdapter(myAdapter);
+        dropdownKlassen.setSelection(Spinnerauswahl.getInt("AusgewählterIndexDropdown",0));
 
-        dropdownU = (Spinner) findViewById(R.id.btnDropdownUnterklassen);
-        ArrayAdapter<String> myAdapterU = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownUnterklassen));
+        dropdownUnterklassen = (Spinner) activeLayout.findViewById(R.id.btnDropdownUnterklassen);
+        ArrayAdapter<String> myAdapterU = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownUnterklassen));
         myAdapterU.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dropdownU.setAdapter(myAdapterU);
-        dropdownU.setSelection(Spinnerauswahl.getInt("AusgewählterIndexDropdownU",0));
+        dropdownUnterklassen.setAdapter(myAdapterU);
+        dropdownUnterklassen.setSelection(Spinnerauswahl.getInt("AusgewählterIndexDropdownU",0));
 
-        btnWeitsprung = findViewById(R.id.btnWeitsprung_Bester);
-        btnSchwimmen = findViewById(R.id.btnSchwimmen);
-        btnSprint = findViewById(R.id.btnSprint);
+        btn_Weitsprung = activeLayout.findViewById(R.id.btn_Weitsprung);
+        btn_Schwimmen = activeLayout.findViewById(R.id.btn_Schwimmen);
+        btn_Sprint = activeLayout.findViewById(R.id.btn_Sprint);
+        btn_Speerwurf = activeLayout.findViewById(R.id.btn_Speerwurf);
 
-        btnWeitsprung.setOnClickListener(new View.OnClickListener() {
-        //    @Override
+        btn_Weitsprung.setOnClickListener(new View.OnClickListener() {
+            //    @Override
             public void onClick(View v) {
-            //    Intent gotToWeitsprung = new Intent(getApplicationContext(), DisplayListView.class);
-              //  startActivity(gotToWeitsprung);
+                //    Intent gotToWeitsprung = new Intent(getApplicationContext(), DisplayListView.class);
+                //  startActivity(gotToWeitsprung);
 
-                Klasse = dropdown.getSelectedItem().toString();
-                UnterKlasse = dropdownU.getSelectedItem().toString();
+                Klasse = dropdownKlassen.getSelectedItem().toString();
+                UnterKlasse = dropdownUnterklassen.getSelectedItem().toString();
                 //BackgroundTask asyncTask = new BackgroundTask(Klasse, UnterKlasse);
 
                 getJSON(Klasse,UnterKlasse);
@@ -69,24 +79,35 @@ public class Disziplin extends Menue {
             }
         });
 
-        btnSchwimmen.setOnClickListener(new View.OnClickListener() {
+        btn_Schwimmen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Schwimmen ausgewählt", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Schwimmen ausgewählt", Toast.LENGTH_SHORT).show();
             }
         });
 
-        btnSprint.setOnClickListener(new View.OnClickListener() {
+        btn_Sprint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Sprint ausgewählt", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Sprint ausgewählt", Toast.LENGTH_SHORT).show();
             }
         });
+
+        btn_Speerwurf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Speerwurf ausgewählt", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Inflate the layout for this fragment
+        return activeLayout;
+
     }
 
     public void getJSON(String Klasse, String UnterKlasse) {
 
-        new Disziplin.BackgroundTask(Klasse,UnterKlasse).execute();
+        new DisziplinFragment.BackgroundTask(Klasse,UnterKlasse).execute();
 
     }
 
@@ -107,7 +128,7 @@ public class Disziplin extends Menue {
         }
         @Override
         protected void onPreExecute() {
-                 }
+        }
 
         @Override
         protected String doInBackground(Void... voids) {
@@ -156,7 +177,7 @@ public class Disziplin extends Menue {
             //JSON Stirng wird mit übergebener Variabel befüllt
             //und daraufhin DisplayListView-Klasse mit dem Extra "json_string" aufgerufen
             json_string= result;
-            Intent intent = new Intent ( getApplicationContext(), DisplayListView.class);
+            Intent intent = new Intent ( getContext(), DisplayListView.class);
             intent.putExtra("json_data", json_string);
             startActivity(intent);
 
@@ -164,12 +185,12 @@ public class Disziplin extends Menue {
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
-        SharedPreferences Spinnerauswahl = getSharedPreferences("Auswahlspinner",0);
+        SharedPreferences Spinnerauswahl = getActivity().getSharedPreferences("Auswahlspinner",0);
         SharedPreferences.Editor editor = Spinnerauswahl.edit();
-        editor.putInt("AusgewählterIndexDropdown",dropdown.getSelectedItemPosition());
-        editor.putInt("AusgewählterIndexDropdownU",dropdownU.getSelectedItemPosition());
+        editor.putInt("AusgewählterIndexDropdown", dropdownKlassen.getSelectedItemPosition());
+        editor.putInt("AusgewählterIndexDropdownU", dropdownUnterklassen.getSelectedItemPosition());
         editor.commit();
     }
 
