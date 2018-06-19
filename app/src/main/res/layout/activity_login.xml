@@ -63,10 +63,11 @@
             android:id="@+id/txtView1"
             android:layout_width="221dp"
             android:layout_height="78dp"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/btnLogIn"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="144dp"
-            android:textAlignment="center" />
+            android:layout_marginTop="-87dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_dark" />
 
     </RelativeLayout>
 

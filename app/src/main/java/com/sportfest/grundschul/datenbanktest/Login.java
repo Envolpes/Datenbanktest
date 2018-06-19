@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -138,7 +141,24 @@ public class Login extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             //Hier hast den String Nehemia
-            JSON_STRING=result;
+            //JSON_STRING=result;
+
+            try{
+                //Auflösen des Strings in das finale JSONObject
+                JSONObject ValidateLogin = new JSONObject(result).getJSONArray("server_response").getJSONObject(0);
+                    Intent goToHome = new Intent(getApplicationContext(), Home.class);
+                    startActivity(goToHome);
+                    Toast.makeText(getApplicationContext(),"Erfolgreich Eingeloggt",Toast.LENGTH_SHORT).show();
+
+
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
+                txtView1.setText("Username oder Password falsch");
+
+            }
+
+
         }
     }
 }
