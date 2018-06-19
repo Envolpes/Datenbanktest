@@ -79,7 +79,7 @@ public class SprungEingabe extends Menue {
                 String modus = Änderung.getText().toString();
 
                 //GET-String zur Übertragung der Daten
-                insertURL = insertURL + "?Springer="+Nummer.getText().toString()+"&Satz1="+satz1+"&Satz2="+satz2+"&Satz3="+satz3 + "&Neu="+modus;
+                insertURL = insertURL + "?Springer=" + Nummer.getText().toString() + "&Satz1=" + satz1 + "&Satz2=" + satz2 + "&Satz3=" + satz3 + "&Neu=" + modus;
 
                 //Aufrufen von SpringerDatenSpeichern
                 SpringerDatenSpeichern();
@@ -92,13 +92,15 @@ public class SprungEingabe extends Menue {
 
     class BackgroundTask extends AsyncTask<Void, Void, String> {
 
+        //Dekleration Variablen
         String json_url;
         String Nummer;
         String JSON_STRING;
 
-        public BackgroundTask(String Nummer){
+        public BackgroundTask(String Nummer) {
 
-            this.Nummer= Nummer;
+            //Übergabe von Parameter Nummer
+            this.Nummer = Nummer;
 
         }
 
@@ -108,17 +110,19 @@ public class SprungEingabe extends Menue {
 
         @Override
         protected String doInBackground(Void... voids) {
-            json_url ="http://91.67.242.37/sprungabfrage.php?Springer="+Nummer;
+            json_url = "http://91.67.242.37/sprungabfrage.php?Springer=" + Nummer;
 
             try {
+
+                //AUFBAU HTTP Connecton und Builden des Strings
                 URL url = new URL(json_url);
-                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 StringBuilder stringBuilder = new StringBuilder();
-                while((JSON_STRING = bufferedReader.readLine())!= null){
+                while ((JSON_STRING = bufferedReader.readLine()) != null) {
 
-                    stringBuilder.append(JSON_STRING+"\n");
+                    stringBuilder.append(JSON_STRING + "\n");
                 }
 
                 bufferedReader.close();
@@ -147,7 +151,7 @@ public class SprungEingabe extends Menue {
         protected void onPostExecute(String result) {
 
             //result ist ein JSONString dieser wird aufgelöst, sodass aus dem JSON Object die einzelnen Sprünge ausgelesen werden können
-            try{
+            try {
                 //Auflösen des Strings in das finale JSONObject
                 JSONObject Sprünge = new JSONObject(result).getJSONArray("server_response").getJSONObject(0);
 
@@ -164,11 +168,10 @@ public class SprungEingabe extends Menue {
 
                 //Textview Änderung bei Vorbefüllung
 
-                if(Satz1.getText().toString()!=null){
+                if (Satz1.getText().toString() != null) {
                     Änderung.setText("Änderungsmodus");
                 }
-            }
-            catch (JSONException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
 
             }
@@ -176,7 +179,7 @@ public class SprungEingabe extends Menue {
         }
     }
 
-    private void SpringerDatenVorbefüllen(){
+    private void SpringerDatenVorbefüllen() {
         //PersonenDaten der Ausgewählten Person aus der vorherigen Activity abholen
         Bundle bundle = getIntent().getExtras();
 
@@ -207,7 +210,7 @@ public class SprungEingabe extends Menue {
 
     }
 
-    private void SpringerDatenSpeichern(){
+    private void SpringerDatenSpeichern() {
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
         //GET Methode, um Weiten zur DB zu schicken
@@ -225,20 +228,13 @@ public class SprungEingabe extends Menue {
                     }
                 }
         );
-
         // Einfügen des Einfügen in die Warteschlange
         requestQueue.add(request);
-
-
-
         try {
-
             URL url = new URL(insertURL);
-            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 }

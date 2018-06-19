@@ -19,10 +19,14 @@ public class DatenAdapter extends ArrayAdapter {
         super(context, resource);
     }
 
-
     public void add(PersonenDaten object) {
         super.add(object);
         list.add(object);
+    }
+
+    static class DatenHolder {
+
+        TextView tx_nummer, tx_klasse, tx_unterklasse, tx_name;
     }
 
     @Override
@@ -44,11 +48,13 @@ public class DatenAdapter extends ArrayAdapter {
         row = convertView;
         DatenHolder datenHolder;
 
-        if(row == null){
+        if (row == null) {
 
-            LayoutInflater layoutInflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            //Inflator wird benutzt, damit DisplayListView von unten reinhuscht
+            LayoutInflater layoutInflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = layoutInflater.inflate(R.layout.row_layout, parent, false);
 
+            //Hier werden die Felder der Reihe festgelegt
             datenHolder = new DatenHolder();
             datenHolder.tx_nummer = (TextView) row.findViewById(R.id.tx_nummer);
             datenHolder.tx_klasse = (TextView) row.findViewById(R.id.tx_klasse);
@@ -57,26 +63,18 @@ public class DatenAdapter extends ArrayAdapter {
             row.setTag(datenHolder);
 
 
+        } else {
 
+            datenHolder = (DatenHolder) row.getTag();
         }
 
-        else{
-
-            datenHolder = (DatenHolder)row.getTag();
-        }
-
+        //Hier werden die Daten aus PersonenDaten geholt und in die Felder geschrieben
         PersonenDaten personenDaten = (PersonenDaten) this.getItem(position);
         datenHolder.tx_nummer.setText(personenDaten.getNummer());
         datenHolder.tx_klasse.setText(personenDaten.getKlasse());
         datenHolder.tx_unterklasse.setText(personenDaten.getUnterklasse());
         datenHolder.tx_name.setText(personenDaten.getName());
         return row;
-    }
-
-    static class DatenHolder{
-
-        TextView tx_nummer,tx_klasse, tx_unterklasse, tx_name;
-
     }
 
 }

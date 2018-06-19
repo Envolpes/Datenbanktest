@@ -24,10 +24,6 @@ public class DisplayListViewStatistik extends Menue {
     ListView listView;
     Array x;
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +35,8 @@ public class DisplayListViewStatistik extends Menue {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Verknüpfen mit row_layout_statistik
-        listView = (ListView)findViewById(R.id.listview);
-        datenAdapter = new DatenAdapterStatistik(this,R.layout.row_layout_statistik);
+        listView = (ListView) findViewById(R.id.listview);
+        datenAdapter = new DatenAdapterStatistik(this, R.layout.row_layout_statistik);
         listView.setAdapter(datenAdapter);
 
         //Hier wird "json_data" von Statistik1 zu DisplayListViewSTatistik übergeben
@@ -51,11 +47,11 @@ public class DisplayListViewStatistik extends Menue {
             //JSON String wird in Object und Array geschrieben
             jsonObject = new JSONObject(json_string);
             jsonArray = new JSONObject(json_string).getJSONArray("server_response");
-            int count =0;
+            int count = 0;
             String weite, klasse, unterklasse, name;
 
 
-            while(count < jsonArray.length()){
+            while (count < jsonArray.length()) {
 
                 //JSON Array wird ausgelesen und in die Variablen geschrieben
                 JSONObject JO = jsonArray.getJSONObject(count);
@@ -78,21 +74,22 @@ public class DisplayListViewStatistik extends Menue {
             e.printStackTrace();
         }
 
-try {
-    JSONObject JO = jsonArray.getJSONObject(1);
-    String weite, klasse, unterklasse, name;
+        try {
 
-    weite = JO.getString("Beste Weite");
-    name = JO.getString("Springer");
-    klasse = JO.getString("Klasse");
-    unterklasse = JO.getString("UnterKlasse");
+            //Alternative, falls was nicht klappt
+            JSONObject JO = jsonArray.getJSONObject(1);
+            String weite, klasse, unterklasse, name;
 
-    PersonenDatenStatistik personenDaten = new PersonenDatenStatistik(weite, klasse, unterklasse, name);
+            weite = JO.getString("Beste Weite");
+            name = JO.getString("Springer");
+            klasse = JO.getString("Klasse");
+            unterklasse = JO.getString("UnterKlasse");
 
-}
-catch (JSONException e) {
-    e.printStackTrace();
-}
+            PersonenDatenStatistik personenDaten = new PersonenDatenStatistik(weite, klasse, unterklasse, name);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 }

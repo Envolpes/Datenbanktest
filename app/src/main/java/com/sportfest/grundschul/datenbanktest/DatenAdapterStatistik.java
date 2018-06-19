@@ -19,6 +19,11 @@ public class DatenAdapterStatistik extends ArrayAdapter {
         super(context, resource);
     }
 
+    static class DatenHolder{
+
+        //Felder der DatenHolder
+        TextView tx_weite,tx_klasse, tx_unterklasse, tx_name;
+    }
 
     public void add(PersonenDatenStatistik object) {
         super.add(object);
@@ -57,13 +62,9 @@ public class DatenAdapterStatistik extends ArrayAdapter {
             datenHolder.tx_unterklasse = (TextView) row.findViewById(R.id.tx_unterklasse);
             datenHolder.tx_name = (TextView) row.findViewById(R.id.tx_name);
             row.setTag(datenHolder);
-
-
-
         }
 
         else{
-
             datenHolder = (DatenHolder)row.getTag();
         }
 
@@ -76,11 +77,5 @@ public class DatenAdapterStatistik extends ArrayAdapter {
         return row;
     }
 
-    static class DatenHolder{
-
-        //Felder der DatenHolder
-        TextView tx_weite,tx_klasse, tx_unterklasse, tx_name;
-
-    }
 
 }

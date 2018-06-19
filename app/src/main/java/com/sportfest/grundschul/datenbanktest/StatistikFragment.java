@@ -25,18 +25,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class StatistikFragment extends Fragment {
 
 
     public StatistikFragment() {
-        // Required empty public constructor
+        //Leerer COnstructor wird benötigt
     }
 
-    private Button btnBester,btnBesteSpruenge, btnSchwimmen, btnSprint, btn_Speerwurf;
+    private Button btnBester, btnBesteSpruenge, btnSchwimmen, btnSprint, btn_Speerwurf;
     String json_string;
     String Klasse = "1";
     String UnterKlasse = "A";
@@ -52,21 +48,22 @@ public class StatistikFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        //Zuweisung von allen Buttons / DropDowns/ etc...
         View activeLayout2 = inflater.inflate(R.layout.fragment_statistik, container, false);
 
-        SharedPreferences SpinnerAuswahl = getActivity().getSharedPreferences("AuswahlSpinner",0);
+        SharedPreferences SpinnerAuswahl = getActivity().getSharedPreferences("AuswahlSpinner", 0);
 
         dropdown = (Spinner) activeLayout2.findViewById(R.id.btnDropdownKlassen);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownKlassenStatistik));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdown.setAdapter(myAdapter);
-        dropdown.setSelection(SpinnerAuswahl.getInt("AusgewählterIndexDropdown",0));
+        dropdown.setSelection(SpinnerAuswahl.getInt("AusgewählterIndexDropdown", 0));
 
         dropdownU = (Spinner) activeLayout2.findViewById(R.id.btnDropdownUnterklassen);
         ArrayAdapter<String> myAdapterU = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownUnterklassenStatistik));
         myAdapterU.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdownU.setAdapter(myAdapterU);
-        dropdownU.setSelection(SpinnerAuswahl.getInt("AusgewählterIndexDropdownU",0));
+        dropdownU.setSelection(SpinnerAuswahl.getInt("AusgewählterIndexDropdownU", 0));
 
         btnBester = activeLayout2.findViewById(R.id.btnWeitsprung_Bester);
         btnBesteSpruenge = activeLayout2.findViewById(R.id.btnWeitsprung_Beste);
@@ -78,6 +75,7 @@ public class StatistikFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                //Zuweisung der RadioGroup und TextView
                 radiogroupSex = (RadioGroup) getActivity().findViewById(R.id.radiogroupSex);
                 AuswahlCheckbox = (TextView) getActivity().findViewById(R.id.auswah);
                 // get selected radio button from radioGroup
@@ -86,7 +84,8 @@ public class StatistikFragment extends Fragment {
                 radioSexButton = (RadioButton) getActivity().findViewById(selectedId);
                 AuswahlCheckbox.setText(radioSexButton.getText());
 
-                new BackgroundTask("beste_sprunge.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString(), radioSexButton.getText().toString()).execute();
+                //Aufruf der Background Task
+                new BackgroundTask("beste_sprunge.php", dropdown.getSelectedItem().toString(), dropdownU.getSelectedItem().toString(), radioSexButton.getText().toString()).execute();
             }
         });
 
@@ -94,6 +93,7 @@ public class StatistikFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                //Zuweisung der RadioGroup und TextView
                 radiogroupSex = (RadioGroup) getActivity().findViewById(R.id.radiogroupSex);
                 AuswahlCheckbox = (TextView) getActivity().findViewById(R.id.auswah);
                 // get selected radio button from radioGroup
@@ -102,16 +102,16 @@ public class StatistikFragment extends Fragment {
                 radioSexButton = (RadioButton) getActivity().findViewById(selectedId);
                 AuswahlCheckbox.setText(radioSexButton.getText());
 
-
-                new BackgroundTask("bester.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString(), radioSexButton.getText().toString() ).execute();
+                //Aufruf der Background Task
+                new BackgroundTask("bester.php", dropdown.getSelectedItem().toString(), dropdownU.getSelectedItem().toString(), radioSexButton.getText().toString()).execute();
             }
         });
 
-        // Inflate the layout for this fragment
+        //Das Layout wird für dieses Fragment Inflated
         return activeLayout2;
     }
-    //Male Female Button Contr
 
+    //Gleiche wie immer
     class BackgroundTask extends AsyncTask<Void, Void, String> {
 
         String json_url;
@@ -122,11 +122,11 @@ public class StatistikFragment extends Fragment {
         String geschlecht;
 
 
-        public BackgroundTask(String befehl, String klasse, String unterklasse, String geschlecht){
+        public BackgroundTask(String befehl, String klasse, String unterklasse, String geschlecht) {
 
-            this.befehl= befehl;
+            this.befehl = befehl;
             this.klasse = klasse;
-            this.unterklasse= unterklasse;
+            this.unterklasse = unterklasse;
             this.geschlecht = geschlecht;
 
         }
@@ -137,17 +137,17 @@ public class StatistikFragment extends Fragment {
 
         @Override
         protected String doInBackground(Void... voids) {
-            json_url ="http://91.67.242.37/" + befehl+"?klasse="+klasse+"&unterklasse="+unterklasse + "&geschlecht=" + geschlecht;
+            json_url = "http://91.67.242.37/" + befehl + "?klasse=" + klasse + "&unterklasse=" + unterklasse + "&geschlecht=" + geschlecht;
 
             try {
                 URL url = new URL(json_url);
-                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 StringBuilder stringBuilder = new StringBuilder();
-                while((JSON_STRING = bufferedReader.readLine())!= null){
+                while ((JSON_STRING = bufferedReader.readLine()) != null) {
 
-                    stringBuilder.append(JSON_STRING+"\n");
+                    stringBuilder.append(JSON_STRING + "\n");
                 }
 
                 bufferedReader.close();
@@ -174,9 +174,9 @@ public class StatistikFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-            //Hier hast den String Nehemia
-            JSON_STRING=result;
-            Intent intent = new Intent ( getActivity(), DisplayListViewStatistik.class);
+            //Intent mit Aufruf der DisplayListViewStatistik
+            JSON_STRING = result;
+            Intent intent = new Intent(getActivity(), DisplayListViewStatistik.class);
             intent.putExtra("json_data", JSON_STRING);
             startActivity(intent);
         }
@@ -184,11 +184,13 @@ public class StatistikFragment extends Fragment {
 
     @Override
     public void onStop() {
+
+        //Wie ein Cookie, speichert die Auswahlen der Dropdowns (Vorspeicherung der DropDowns)
         super.onStop();
-        SharedPreferences SpinnerAuswahl = getActivity().getSharedPreferences("AuswahlSpinner",0);
+        SharedPreferences SpinnerAuswahl = getActivity().getSharedPreferences("AuswahlSpinner", 0);
         SharedPreferences.Editor editor = SpinnerAuswahl.edit();
-        editor.putInt("AusgewählterIndexDropdown",dropdown.getSelectedItemPosition());
-        editor.putInt("AusgewählterIndexDropdownU",dropdownU.getSelectedItemPosition());
+        editor.putInt("AusgewählterIndexDropdown", dropdown.getSelectedItemPosition());
+        editor.putInt("AusgewählterIndexDropdownU", dropdownU.getSelectedItemPosition());
         editor.commit();
     }
 

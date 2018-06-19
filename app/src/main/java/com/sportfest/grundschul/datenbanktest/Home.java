@@ -38,12 +38,11 @@ public class Home extends Menue {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
 
                     case R.id.nav_Diziplin:
                         setFragment(dizFragm);
                         return true;
-
 
                     case R.id.nav_Statistik:
                         setFragment(statFragm);
@@ -53,33 +52,12 @@ public class Home extends Menue {
                     default:
                         return false;
                 }
-
             }
         });
-/*
-        btnDisziplin = findViewById(R.id.btnDisziplin);
-        btnStatistik = findViewById(R.id.btnStatistik);
-
-        btnStatistik.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent gotToStatistik = new Intent(getApplicationContext(), Statistik1.class);
-                startActivity(gotToStatistik);
-            }
-        });
-        btnDisziplin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goToDisziplin = new Intent(getApplicationContext(), Disziplin.class);
-                startActivity(goToDisziplin);
-            }
-        });*/
     }
-
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_frame, fragment);
         fragmentTransaction.commit();
     }
-
 }

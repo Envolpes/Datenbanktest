@@ -30,17 +30,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-
 public class DisziplinFragment extends Fragment {
 
+    //Deklaration
     private Button btn_Weitsprung, btn_Schwimmen, btn_Sprint, btn_Speerwurf;
     Spinner dropdownKlassen, dropdownUnterklassen;
     String Klasse, UnterKlasse, json_string1;
     private FrameLayout SchülerListe;
-    //private DisplayListViewFragment Listview;
     JSONObject jsonObject;
     JSONArray jsonArray;
     DatenAdapter datenAdapter;
@@ -48,32 +44,31 @@ public class DisziplinFragment extends Fragment {
     TextView txt_Überschrift;
 
     public DisziplinFragment() {
-        // Required empty public constructor
+        // Leerer Constructor wird benötigt
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        //Hier werden alle Buttons usw. zugewiesen
         View activeLayout = inflater.inflate(R.layout.fragment_disziplin, container, false);
 
-        SharedPreferences Spinnerauswahl = getActivity().getSharedPreferences("Auswahlspinner",0);
+        //Cookie
+        SharedPreferences Spinnerauswahl = getActivity().getSharedPreferences("Auswahlspinner", 0);
 
-        //SchülerListe = (FrameLayout) activeLayout.findViewById(R.id.schülerliste_frame);
-       // Listview = new DisplayListViewFragment();
-
-        txt_Überschrift= activeLayout.findViewById(R.id.txt_uberschrift);
+        txt_Überschrift = activeLayout.findViewById(R.id.txt_uberschrift);
 
         dropdownKlassen = (Spinner) activeLayout.findViewById(R.id.btnDropdownKlassen);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownKlassen));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdownKlassen.setAdapter(myAdapter);
-        dropdownKlassen.setSelection(Spinnerauswahl.getInt("AusgewählterIndexDropdown",0));
+        dropdownKlassen.setSelection(Spinnerauswahl.getInt("AusgewählterIndexDropdown", 0));
 
         dropdownUnterklassen = (Spinner) activeLayout.findViewById(R.id.btnDropdownUnterklassen);
         ArrayAdapter<String> myAdapterU = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownUnterklassen));
         myAdapterU.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdownUnterklassen.setAdapter(myAdapterU);
-        dropdownUnterklassen.setSelection(Spinnerauswahl.getInt("AusgewählterIndexDropdownU",0));
+        dropdownUnterklassen.setSelection(Spinnerauswahl.getInt("AusgewählterIndexDropdownU", 0));
 
         btn_Weitsprung = activeLayout.findViewById(R.id.btn_Weitsprung);
         btn_Schwimmen = activeLayout.findViewById(R.id.btn_Schwimmen);
@@ -83,18 +78,16 @@ public class DisziplinFragment extends Fragment {
         btn_Weitsprung.setOnClickListener(new View.OnClickListener() {
             //    @Override
             public void onClick(View v) {
-                //    Intent gotToWeitsprung = new Intent(getApplicationContext(), DisplayListView.class);
-                //  startActivity(gotToWeitsprung);
 
+                //Übergabe der DropdownWerte in JSON
                 Klasse = dropdownKlassen.getSelectedItem().toString();
                 UnterKlasse = dropdownUnterklassen.getSelectedItem().toString();
-                //BackgroundTask asyncTask = new BackgroundTask(Klasse, UnterKlasse);
-
-                getJSON(Klasse,UnterKlasse);
+                getJSON(Klasse, UnterKlasse);
 
             }
         });
 
+        //Alternativen, falls die anderen Knöpfe gedrückt werden
         btn_Schwimmen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,19 +109,21 @@ public class DisziplinFragment extends Fragment {
             }
         });
 
-        // Inflate the layout for this fragment
+        // Inflate das Layout für dieses Fragment
         return activeLayout;
 
     }
 
     public void getJSON(String Klasse, String UnterKlasse) {
 
-        new DisziplinFragment.BackgroundTask(Klasse,UnterKlasse).execute();
+        //Background wird aufgerufen
+        new DisziplinFragment.BackgroundTask(Klasse, UnterKlasse).execute();
 
     }
 
     class BackgroundTask extends AsyncTask<Void, Void, String> {
 
+        //Deklaration der Variablen
         String json_url;
         String JSON_STRING;
 
@@ -136,12 +131,14 @@ public class DisziplinFragment extends Fragment {
         private String UnterKlasse;
 
 
-        public BackgroundTask(String Klasse, String UnterKlasse){
+        public BackgroundTask(String Klasse, String UnterKlasse) {
 
+            //Übergabe der Parameter durch COnstructor
             this.Klasse = Klasse;
-            this.UnterKlasse= UnterKlasse;
+            this.UnterKlasse = UnterKlasse;
 
         }
+
         @Override
         protected void onPreExecute() {
         }
@@ -149,20 +146,20 @@ public class DisziplinFragment extends Fragment {
         @Override
         protected String doInBackground(Void... voids) {
             //Hier wird die JSON-URL aufgebaut
-            json_url="http://91.67.242.37/json_get_data_schulklasse.php?klasse=" +Klasse+"&unterklasse="+UnterKlasse;
+            json_url = "http://91.67.242.37/json_get_data_schulklasse.php?klasse=" + Klasse + "&unterklasse=" + UnterKlasse;
             try {
 
                 //URL Link wir genutzt, um HTTP Connection herzustellen
                 URL url = new URL(json_url);
-                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 StringBuilder stringBuilder = new StringBuilder();
 
                 //STRING wird aus den Lines des bufferedReader gelesen und in JSON_String geschrieben
-                while((JSON_STRING = bufferedReader.readLine())!= null){
+                while ((JSON_STRING = bufferedReader.readLine()) != null) {
 
-                    stringBuilder.append(JSON_STRING+"\n");
+                    stringBuilder.append(JSON_STRING + "\n");
                 }
 
                 //Schließen der Connections
@@ -194,8 +191,8 @@ public class DisziplinFragment extends Fragment {
             //und daraufhin DisplayListView-Klasse mit dem Extra "json_string1" aufgerufen
             json_string1 = result;
 
-            listView = (ListView)getActivity().findViewById(R.id.listview);
-            datenAdapter = new DatenAdapter(getContext(),R.layout.row_layout);
+            listView = (ListView) getActivity().findViewById(R.id.listview);
+            datenAdapter = new DatenAdapter(getContext(), R.layout.row_layout);
             listView.setAdapter(datenAdapter);
 
             try {
@@ -203,11 +200,11 @@ public class DisziplinFragment extends Fragment {
                 //JSON String wird in Object und Array geschrieben
                 jsonObject = new JSONObject(json_string1);
                 jsonArray = new JSONObject(json_string1).getJSONArray("server_response");
-                int count =0;
+                int count = 0;
                 String nummer, klasse, unterklasse, name;
 
 
-                while(count < jsonArray.length()){
+                while (count < jsonArray.length()) {
 
                     //JSON Array wird ausgelesen und in die Variablen geschrieben
                     JSONObject JO = jsonArray.getJSONObject(count);
@@ -227,17 +224,17 @@ public class DisziplinFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            if(jsonArray.length() ==0){
+            if (jsonArray.length() == 0) {
                 txt_Überschrift.setText("Diese Klasse enthält keine Schüler");
-            }else{
-                txt_Überschrift.setText("Schüler der Klasse "+Klasse +UnterKlasse);
+            } else {
+                txt_Überschrift.setText("Schüler der Klasse " + Klasse + UnterKlasse);
             }
 
             //Click auf Schülernamen
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent= new Intent(getContext(), SprungEingabe.class);
+                    Intent intent = new Intent(getContext(), SprungEingabe.class);
 
                     //SprungEingabe mit Schüler wird aufgerufen
                     try {
@@ -249,30 +246,15 @@ public class DisziplinFragment extends Fragment {
                     startActivity(intent);
                 }
             });
-
-            try {
-                JSONObject JO = jsonArray.getJSONObject(1);
-                String nummer, klasse, unterklasse, name;
-
-                nummer = JO.getString("nummer");
-                klasse = JO.getString("klasse");
-                unterklasse = JO.getString("unterklasse");
-                name = JO.getString("name");
-
-                PersonenDaten personenDaten = new PersonenDaten(nummer, klasse, unterklasse, name);
-                //Toast.makeText(getApplicationContext(), personenDaten.getNummer(), Toast.LENGTH_LONG).show();
-
-            }
-            catch (JSONException e) {
-                e.printStackTrace();
-            }
         }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        SharedPreferences Spinnerauswahl = getActivity().getSharedPreferences("Auswahlspinner",0);
+
+        //Quasi Cookie, Speicherung der DropDown Auswahl
+        SharedPreferences Spinnerauswahl = getActivity().getSharedPreferences("Auswahlspinner", 0);
         SharedPreferences.Editor editor = Spinnerauswahl.edit();
         editor.putInt("AusgewählterIndexDropdown", dropdownKlassen.getSelectedItemPosition());
         editor.putInt("AusgewählterIndexDropdownU", dropdownUnterklassen.getSelectedItemPosition());
