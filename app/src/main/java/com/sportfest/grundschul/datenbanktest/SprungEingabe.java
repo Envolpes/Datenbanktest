@@ -81,6 +81,7 @@ public class SprungEingabe extends Menue {
                 //GET-String zur Übertragung der Daten
                 insertURL = insertURL + "?Springer="+Nummer.getText().toString()+"&Satz1="+satz1+"&Satz2="+satz2+"&Satz3="+satz3 + "&Neu="+modus;
 
+                //Aufrufen von SpringerDatenSpeichern
                 SpringerDatenSpeichern();
 
                 //Sprung in ListView
@@ -144,9 +145,6 @@ public class SprungEingabe extends Menue {
 
         @Override
         protected void onPostExecute(String result) {
-            //TextView textView = (TextView) findViewById(R.id.textView2);//zum testen
-            //JSON_Text= result; //Variable nicht nötig
-            //textView.setText(result); //zum testen
 
             //result ist ein JSONString dieser wird aufgelöst, sodass aus dem JSON Object die einzelnen Sprünge ausgelesen werden können
             try{
@@ -203,9 +201,6 @@ public class SprungEingabe extends Menue {
         Änderung = (TextView) findViewById(R.id.Änderung);
         Änderung.setText("Neu");
 
-        //Startnumemrnvariable bereitstellen, nicht nötig da background task direkt aufgerufen werden kann
-        //String StNummer = user.getNummer();
-        //getJSON(StNummer);
 
         //Sprungweiten der Person aus Datenbank holen und die Felder vorbefüllen
         new SprungEingabe.BackgroundTask(user.getNummer()).execute();
@@ -246,26 +241,4 @@ public class SprungEingabe extends Menue {
 
 
     }
-
-
-
-    /*//Diese Methode ist nicht nötig, da backgroud direkt aufgerufen werden kann
-    public void getJSON(String Nummer) {
-
-        new SprungEingabe.BackgroundTask(Nummer).execute();
-
-    }
-    */
 }
-
-
-
-
-/*ToDo:
-// -Man darf nicht 0 eingeben - NeTu
-// -Falls Werte vorhanden sind, sollen diese dort erscheinen - NeTu / Mawe
-//          -JSON String, welcher vorhandene PersonenDaten schickt - MaWe
-            -Die PersonenDaten sollen in den Feldern eingefügt werden - NeTu/(MaWe)
-
----------
-*/

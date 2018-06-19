@@ -1,26 +1,26 @@
 package com.sportfest.grundschul.datenbanktest;
 
-public class PersonenDaten {
+public class PersonenDatenStatistik {
 
-    private String nummer, klasse, unterklasse, name;
+    private String weite, klasse, unterklasse, name;
 
-    //Constructor
-    public PersonenDaten(String nummer, String klasse, String unterklasse, String name){
+    //Constructor für setDaten
+    public PersonenDatenStatistik(String weite, String klasse, String unterklasse, String name){
 
-        this.setNummer(nummer);
+        this.setWeite(weite);
         this.setKlasse(klasse);
         this.setUnterklasse(unterklasse);
         this.setName(name);
 
     }
 
-    //GETter- und SETter-MEthoden
-    public String getNummer() {
-        return nummer;
+    //GETter und SETter_Methoden
+    public String getWeite() {
+        return weite;
     }
 
-    public void setNummer(String nummer) {
-        this.nummer = nummer;
+    public void setWeite(String weite) {
+        this.weite = weite;
     }
 
     public String getKlasse() {

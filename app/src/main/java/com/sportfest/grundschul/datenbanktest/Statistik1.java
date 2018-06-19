@@ -1,6 +1,5 @@
 package com.sportfest.grundschul.datenbanktest;
 
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,7 +33,6 @@ public class Statistik1 extends Menue {
     private RadioGroup radiogroupSex;
     private RadioButton radioSexButton;
     TextView AuswahlCheckbox;
-    Spinner dropdown, dropdownU;
 
     //FÜR JSON STRING
     String befehl;
@@ -50,19 +48,15 @@ public class Statistik1 extends Menue {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        SharedPreferences SpinnerAuswahl = getSharedPreferences("AuswahlSpinner",0);
-
-        dropdown = (Spinner) findViewById(R.id.btnDropdownKlassen);
+        final Spinner dropdown = (Spinner) findViewById(R.id.btnDropdownKlassen);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownKlassenStatistik));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdown.setAdapter(myAdapter);
-        dropdown.setSelection(SpinnerAuswahl.getInt("AusgewählterIndexDropdown",0));
 
-        dropdownU = (Spinner) findViewById(R.id.btnDropdownUnterklassen);
+        final Spinner dropdownU = (Spinner) findViewById(R.id.btnDropdownUnterklassen);
         ArrayAdapter<String> myAdapterU = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownUnterklassenStatistik));
         myAdapterU.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdownU.setAdapter(myAdapterU);
-        dropdownU.setSelection(SpinnerAuswahl.getInt("AusgewählterIndexDropdownU",0));
 
         btnBester = findViewById(R.id.btnWeitsprung_Bester);
         btnBesteSpruenge = findViewById(R.id.btnWeitsprung_Beste);
@@ -73,16 +67,14 @@ public class Statistik1 extends Menue {
         btnBesteSpruenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                new Statistik1.BackgroundTask("beste_sprunge.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString()).execute();
+                new Statistik1.BackgroundTask("beste_sprunge.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString(), radioSexButton.getText().toString()).execute();
             }
         });
 
         btnBester.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                new Statistik1.BackgroundTask("bester.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString()).execute();
+                new Statistik1.BackgroundTask("bester.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString(), radioSexButton.getText().toString() ).execute();
             }
         });
 
@@ -123,13 +115,15 @@ public class Statistik1 extends Menue {
         String JSON_STRING;
         String klasse;
         String unterklasse;
+        String geschlecht;
 
 
-        public BackgroundTask(String befehl, String klasse, String unterklasse){
+        public BackgroundTask(String befehl, String klasse, String unterklasse, String geschlecht){
 
             this.befehl= befehl;
             this.klasse = klasse;
             this.unterklasse= unterklasse;
+            this.geschlecht = geschlecht;
 
         }
 
@@ -139,7 +133,7 @@ public class Statistik1 extends Menue {
 
         @Override
         protected String doInBackground(Void... voids) {
-            json_url ="http://91.67.242.37/" + befehl+"?klasse="+klasse+"&unterklasse="+unterklasse;
+            json_url ="http://91.67.242.37/" + befehl+"?klasse="+klasse+"&unterklasse="+unterklasse + "&geschlecht=" + geschlecht;
 
             try {
                 URL url = new URL(json_url);
@@ -181,13 +175,7 @@ public class Statistik1 extends Menue {
         }
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        SharedPreferences SpinnerAuswahl = getSharedPreferences("AuswahlSpinner",0);
-        SharedPreferences.Editor editor = SpinnerAuswahl.edit();
-        editor.putInt("AusgewählterIndexDropdown",dropdown.getSelectedItemPosition());
-        editor.putInt("AusgewählterIndexDropdownU",dropdownU.getSelectedItemPosition());
-        editor.commit();
-    }
+
+
+
 }

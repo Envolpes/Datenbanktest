@@ -12,15 +12,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatenAdapter extends ArrayAdapter {
+public class DatenAdapterStatistik extends ArrayAdapter {
     List list = new ArrayList();
 
-    public DatenAdapter(@NonNull Context context, int resource) {
+    public DatenAdapterStatistik(@NonNull Context context, int resource) {
         super(context, resource);
     }
 
 
-    public void add(PersonenDaten object) {
+    public void add(PersonenDatenStatistik object) {
         super.add(object);
         list.add(object);
     }
@@ -46,11 +46,13 @@ public class DatenAdapter extends ArrayAdapter {
 
         if(row == null){
 
+            //Inflator wird benutzt, damit DisplayListViewStatistik von unten reinhuscht
             LayoutInflater layoutInflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = layoutInflater.inflate(R.layout.row_layout, parent, false);
+            row = layoutInflater.inflate(R.layout.row_layout_statistik, parent, false);
 
+            //Hier werden die Felder der Reihe festgelegt
             datenHolder = new DatenHolder();
-            datenHolder.tx_nummer = (TextView) row.findViewById(R.id.tx_weite);
+            datenHolder.tx_weite = (TextView) row.findViewById(R.id.tx_weite);
             datenHolder.tx_klasse = (TextView) row.findViewById(R.id.tx_klasse);
             datenHolder.tx_unterklasse = (TextView) row.findViewById(R.id.tx_unterklasse);
             datenHolder.tx_name = (TextView) row.findViewById(R.id.tx_name);
@@ -65,9 +67,9 @@ public class DatenAdapter extends ArrayAdapter {
             datenHolder = (DatenHolder)row.getTag();
         }
 
-
-        PersonenDaten personenDaten = (PersonenDaten) this.getItem(position);
-        datenHolder.tx_nummer.setText(personenDaten.getNummer());
+        //Hier werden die Daten aus PersonenDatenStatistik geholt und in die Felder geschrieben
+        PersonenDatenStatistik personenDaten = (PersonenDatenStatistik) this.getItem(position);
+        datenHolder.tx_weite.setText(personenDaten.getWeite());
         datenHolder.tx_klasse.setText(personenDaten.getKlasse());
         datenHolder.tx_unterklasse.setText(personenDaten.getUnterklasse());
         datenHolder.tx_name.setText(personenDaten.getName());
@@ -76,7 +78,8 @@ public class DatenAdapter extends ArrayAdapter {
 
     static class DatenHolder{
 
-        TextView tx_nummer,tx_klasse, tx_unterklasse, tx_name;
+        //Felder der DatenHolder
+        TextView tx_weite,tx_klasse, tx_unterklasse, tx_name;
 
     }
 

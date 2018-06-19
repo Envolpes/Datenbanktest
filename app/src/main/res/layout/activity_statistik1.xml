@@ -71,14 +71,6 @@
             android:text="Sprint"
             android:textSize="30sp" />
 
-        <Button
-            android:id="@+id/GetKlasse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:onClick="getJSON"
-            android:text="Bestätigen" />
-
         <RadioGroup
             android:id="@+id/radiogroupSex"
             android:layout_width="wrap_content"
