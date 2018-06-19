@@ -62,7 +62,6 @@ public class Statistik1 extends Menue {
         btnBesteSpruenge = findViewById(R.id.btnWeitsprung_Beste);
         btnSchwimmen = findViewById(R.id.btnSchwimmen);
         btnSprint = findViewById(R.id.btnSprint);
-        btnBestätigen = findViewById(R.id.GetKlasse);
 
         btnBesteSpruenge.setOnClickListener(new View.OnClickListener() {
             @Override
