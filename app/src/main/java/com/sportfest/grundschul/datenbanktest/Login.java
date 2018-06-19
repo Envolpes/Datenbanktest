@@ -141,5 +141,4 @@ public class Login extends AppCompatActivity {
             JSON_STRING=result;
         }
     }
-
 }
