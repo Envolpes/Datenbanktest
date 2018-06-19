@@ -88,7 +88,6 @@ try {
     unterklasse = JO.getString("UnterKlasse");
 
     PersonenDatenStatistik personenDaten = new PersonenDatenStatistik(weite, klasse, unterklasse, name);
-    Toast.makeText(getApplicationContext(), personenDaten.getName(), Toast.LENGTH_LONG).show();
 
 }
 catch (JSONException e) {
