@@ -10,135 +10,148 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/buttonContainer"
-        android:layout_width="match_parent"
-        android:layout_height="371dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/btnWeitsprung_Beste"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/auswah"
-            android:background="#e7e247"
-            android:onClick="BesteSpruenge"
-            android:layout_toRightOf="@+id/btnWeitsprung_Bester"
-            android:text="Beste Sprünge"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/auswah"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/buttonContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="111dp"
-            tools:layout_editor_absoluteX="162dp"
-            tools:layout_editor_absoluteY="167dp" />
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/KlassenauswahlLayout">
 
-        <Button
-            android:id="@+id/btnWeitsprung_Bester"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_alignTop="@+id/auswah"
-            android:background="#e7e247"
-            android:onClick="BesterSprung"
-            android:text="Bester Sprung"
-            android:textSize="14sp" />
+            <Button
+                android:id="@+id/btnWeitsprung_Beste"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/auswah"
+                android:layout_marginTop="52dp"
+                android:layout_toRightOf="@+id/btnWeitsprung_Bester"
+                android:background="#e7e247"
+                android:onClick="BesteSpruenge"
+                android:text="Beste Sprünge"
+                android:textSize="20sp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp" />
 
-        <Button
-            android:id="@+id/btnSchwimmen"
-            android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:layout_above="@+id/btnSprint"
-            android:background="#e7e247"
-            android:text="Schwimmen"
-            android:textSize="30sp" />
+            <Button
+                android:id="@+id/btnWeitsprung_Bester"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_alignTop="@+id/auswah"
+                android:layout_marginStart="176dp"
+                android:layout_marginTop="52dp"
+                android:background="#e7e247"
+                android:onClick="BesterSprung"
+                android:text="Bester Sprung"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btnSprint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="40dp"
-            android:background="#e7e247"
-            android:text="Sprint"
-            android:textSize="30sp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/KlassenauswahlLayout"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:background="#e7e247"
-
-        app:layout_constraintBottom_toTopOf="@+id/buttonContainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarBasis"
-        app:layout_constraintVertical_bias="0.594">
-
-        <RadioGroup
-            android:id="@+id/radiogroupSex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radioM"
+            <RadioGroup
+                android:id="@+id/radiogroupSex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_weight="1"
-                android:checked="true"
-                android:text="M"
-                android:textSize="20dp" />
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <RadioButton
-                android:id="@+id/radioW"
+                <RadioButton
+                    android:id="@+id/radioM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="M"
+                    android:textSize="20dp" />
+
+                <RadioButton
+                    android:id="@+id/radioW"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="W"
+                    android:textSize="20dp" />
+            </RadioGroup>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <RelativeLayout
+            android:id="@+id/KlassenauswahlLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="#e7e247"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/txtKlasse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
                 android:layout_weight="1"
-                android:checked="false"
-                android:text="W"
-                android:textSize="20dp" />
-        </RadioGroup>
+                android:text="Klasse:"
+                android:textSize="35sp" />
+
+            <Spinner
+                android:id="@+id/btnDropdownKlassen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/txtKlasse" />
+
+            <Spinner
+                android:id="@+id/btnDropdownUnterklassen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/btnDropdownKlassen" />
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_uberschrift"
+            app:layout_constraintVertical_bias="0.0">
+
+        </ListView>
 
         <TextView
-            android:id="@+id/txtKlasse"
+            android:id="@+id/txt_uberschrift"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Klasse:"
-            android:textSize="25sp" />
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonContainer" />
 
-        <Spinner
-            android:id="@+id/btnDropdownKlassen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/txtKlasse" />
-
-        <Spinner
-            android:id="@+id/btnDropdownUnterklassen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/btnDropdownKlassen" />
-
-
-    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
 </FrameLayout>

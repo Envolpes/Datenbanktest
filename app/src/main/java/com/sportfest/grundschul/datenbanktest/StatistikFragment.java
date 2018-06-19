@@ -11,11 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,23 +32,21 @@ import java.net.URL;
 
 public class StatistikFragment extends Fragment {
 
+    //Deklaration der Variablen
+    String json_string;
+    JSONObject jsonObject;
+    JSONArray jsonArray;
+    DatenAdapterStatistik datenAdapter;
+    ListView listView;
+    Button btnBester, btnBesteSpruenge;
+    RadioGroup radiogroupSex;
+    RadioButton radioSexButton;
+    TextView AuswahlCheckbox;
+    Spinner dropdown, dropdownU;
 
     public StatistikFragment() {
         //Leerer COnstructor wird benötigt
     }
-
-    private Button btnBester, btnBesteSpruenge, btnSchwimmen, btnSprint, btn_Speerwurf;
-    String json_string;
-    String Klasse = "1";
-    String UnterKlasse = "A";
-    private RadioGroup radiogroupSex;
-    private RadioButton radioSexButton;
-    TextView AuswahlCheckbox;
-    Spinner dropdown, dropdownU;
-
-    //FÜR JSON STRING
-    String befehl;
-    String JSON_STRING;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,8 +70,6 @@ public class StatistikFragment extends Fragment {
 
         btnBester = activeLayout2.findViewById(R.id.btnWeitsprung_Bester);
         btnBesteSpruenge = activeLayout2.findViewById(R.id.btnWeitsprung_Beste);
-        btnSchwimmen = activeLayout2.findViewById(R.id.btnSchwimmen);
-        btnSprint = activeLayout2.findViewById(R.id.btnSprint);
 
         btnBesteSpruenge.setOnClickListener(new View.OnClickListener() {
 
@@ -82,7 +83,6 @@ public class StatistikFragment extends Fragment {
                 int selectedId = radiogroupSex.getCheckedRadioButtonId();
                 // find the radiobutton by returned id
                 radioSexButton = (RadioButton) getActivity().findViewById(selectedId);
-                AuswahlCheckbox.setText(radioSexButton.getText());
 
                 //Aufruf der Background Task
                 new BackgroundTask("beste_sprunge.php", dropdown.getSelectedItem().toString(), dropdownU.getSelectedItem().toString(), radioSexButton.getText().toString()).execute();
@@ -100,7 +100,6 @@ public class StatistikFragment extends Fragment {
                 int selectedId = radiogroupSex.getCheckedRadioButtonId();
                 // find the radiobutton by returned id
                 radioSexButton = (RadioButton) getActivity().findViewById(selectedId);
-                AuswahlCheckbox.setText(radioSexButton.getText());
 
                 //Aufruf der Background Task
                 new BackgroundTask("bester.php", dropdown.getSelectedItem().toString(), dropdownU.getSelectedItem().toString(), radioSexButton.getText().toString()).execute();
@@ -174,11 +173,62 @@ public class StatistikFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-            //Intent mit Aufruf der DisplayListViewStatistik
-            JSON_STRING = result;
-            Intent intent = new Intent(getActivity(), DisplayListViewStatistik.class);
-            intent.putExtra("json_data", JSON_STRING);
-            startActivity(intent);
+            //Verknüpfen mit row_layout_statistik
+            listView = (ListView) getActivity().findViewById(R.id.listview);
+            datenAdapter = new DatenAdapterStatistik(getContext(), R.layout.row_layout_statistik);
+            listView.setAdapter(datenAdapter);
+
+            //Hier wird "json_data" übergeben
+            json_string = result;
+
+            try {
+
+                //JSON String wird in Object und Array geschrieben
+                jsonObject = new JSONObject(json_string);
+                jsonArray = new JSONObject(json_string).getJSONArray("server_response");
+                int count = 0;
+                String weite, klasse, unterklasse, name;
+
+
+                while (count < jsonArray.length()) {
+
+                    //JSON Array wird ausgelesen und in die Variablen geschrieben
+                    JSONObject JO = jsonArray.getJSONObject(count);
+
+                    weite = JO.getString("Beste Weite");
+                    name = JO.getString("Springer");
+                    klasse = JO.getString("Klasse");
+                    unterklasse = JO.getString("UnterKlasse");
+
+                    //Daten werden in PersonenDatenStatistik gespeichert
+                    PersonenDatenStatistik personenDaten = new PersonenDatenStatistik(weite, klasse, unterklasse, name);
+
+                    //DatenAdapterStatistik bekommt die Informationen, welche wir eben in PersonenDatenStatistik gespeichert haben
+                    datenAdapter.add(personenDaten);
+
+                    count++;
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+
+                //Alternative, falls was nicht klappt
+                JSONObject JO = jsonArray.getJSONObject(1);
+                String weite, klasse, unterklasse, name;
+
+                weite = JO.getString("Beste Weite");
+                name = JO.getString("Springer");
+                klasse = JO.getString("Klasse");
+                unterklasse = JO.getString("UnterKlasse");
+
+                PersonenDatenStatistik personenDaten = new PersonenDatenStatistik(weite, klasse, unterklasse, name);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
