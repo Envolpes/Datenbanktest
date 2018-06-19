@@ -1,6 +1,7 @@
 package com.sportfest.grundschul.datenbanktest;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -83,7 +84,6 @@ public class StatistikFragment extends Fragment {
                 int selectedId = radiogroupSex.getCheckedRadioButtonId();
                 // find the radiobutton by returned id
                 radioSexButton = (RadioButton) getActivity().findViewById(selectedId);
-                Toast.makeText(getContext(), radioSexButton.getText(), Toast.LENGTH_SHORT).show();
                 AuswahlCheckbox.setText(radioSexButton.getText());
 
                 new BackgroundTask("beste_sprunge.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString(), radioSexButton.getText().toString()).execute();
@@ -100,7 +100,6 @@ public class StatistikFragment extends Fragment {
                 int selectedId = radiogroupSex.getCheckedRadioButtonId();
                 // find the radiobutton by returned id
                 radioSexButton = (RadioButton) getActivity().findViewById(selectedId);
-                Toast.makeText(getContext(), radioSexButton.getText(), Toast.LENGTH_SHORT).show();
                 AuswahlCheckbox.setText(radioSexButton.getText());
 
 
@@ -177,6 +176,9 @@ public class StatistikFragment extends Fragment {
         protected void onPostExecute(String result) {
             //Hier hast den String Nehemia
             JSON_STRING=result;
+            Intent intent = new Intent ( getActivity(), DisplayListViewStatistik.class);
+            intent.putExtra("json_data", JSON_STRING);
+            startActivity(intent);
         }
     }
 
