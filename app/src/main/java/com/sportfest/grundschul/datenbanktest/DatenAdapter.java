@@ -50,7 +50,7 @@ public class DatenAdapter extends ArrayAdapter {
             row = layoutInflater.inflate(R.layout.row_layout, parent, false);
 
             datenHolder = new DatenHolder();
-            datenHolder.tx_nummer = (TextView) row.findViewById(R.id.tx_weite);
+            datenHolder.tx_nummer = (TextView) row.findViewById(R.id.tx_nummer);
             datenHolder.tx_klasse = (TextView) row.findViewById(R.id.tx_klasse);
             datenHolder.tx_unterklasse = (TextView) row.findViewById(R.id.tx_unterklasse);
             datenHolder.tx_name = (TextView) row.findViewById(R.id.tx_name);
@@ -64,7 +64,6 @@ public class DatenAdapter extends ArrayAdapter {
 
             datenHolder = (DatenHolder)row.getTag();
         }
-
 
         PersonenDaten personenDaten = (PersonenDaten) this.getItem(position);
         datenHolder.tx_nummer.setText(personenDaten.getNummer());

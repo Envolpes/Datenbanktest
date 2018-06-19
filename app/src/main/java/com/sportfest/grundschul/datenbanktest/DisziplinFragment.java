@@ -40,7 +40,7 @@ public class DisziplinFragment extends Fragment {
     Spinner dropdownKlassen, dropdownUnterklassen;
     String Klasse, UnterKlasse, json_string1;
     private FrameLayout SchülerListe;
-    private DisplayListViewFragment Listview;
+    //private DisplayListViewFragment Listview;
     JSONObject jsonObject;
     JSONArray jsonArray;
     DatenAdapter datenAdapter;
@@ -59,7 +59,7 @@ public class DisziplinFragment extends Fragment {
         SharedPreferences Spinnerauswahl = getActivity().getSharedPreferences("Auswahlspinner",0);
 
         //SchülerListe = (FrameLayout) activeLayout.findViewById(R.id.schülerliste_frame);
-        Listview = new DisplayListViewFragment();
+       // Listview = new DisplayListViewFragment();
 
         txt_Überschrift= activeLayout.findViewById(R.id.txt_uberschrift);
 

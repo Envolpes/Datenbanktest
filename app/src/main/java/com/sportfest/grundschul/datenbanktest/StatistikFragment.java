@@ -73,42 +73,45 @@ public class StatistikFragment extends Fragment {
         btnSprint = activeLayout2.findViewById(R.id.btnSprint);
 
         btnBesteSpruenge.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
-                new StatistikFragment.BackgroundTask("beste_sprunge.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString()).execute();
-            }
-        });
-
-        btnBester.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                new StatistikFragment.BackgroundTask("bester.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString()).execute();
-            }
-        });
-
-        // Inflate the layout for this fragment
-        return activeLayout2;
-    }
-
-    //Male Female Button Control
-    public void addListenerOnButton() {
-        radiogroupSex = (RadioGroup) getActivity().findViewById(R.id.radiogroupSex);
-        AuswahlCheckbox = (TextView) getActivity().findViewById(R.id.auswah);
-        btnBester = getActivity().findViewById(R.id.btnWeitsprung_Bester);
-        btnBester.setOnClickListener(new View.OnClickListener() {
-            //    @Override
-            public void onClick(View v) {
+                radiogroupSex = (RadioGroup) getActivity().findViewById(R.id.radiogroupSex);
+                AuswahlCheckbox = (TextView) getActivity().findViewById(R.id.auswah);
                 // get selected radio button from radioGroup
                 int selectedId = radiogroupSex.getCheckedRadioButtonId();
                 // find the radiobutton by returned id
                 radioSexButton = (RadioButton) getActivity().findViewById(selectedId);
                 Toast.makeText(getContext(), radioSexButton.getText(), Toast.LENGTH_SHORT).show();
                 AuswahlCheckbox.setText(radioSexButton.getText());
+
+                new BackgroundTask("beste_sprunge.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString(), radioSexButton.getText().toString()).execute();
             }
         });
+
+        btnBester.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                radiogroupSex = (RadioGroup) getActivity().findViewById(R.id.radiogroupSex);
+                AuswahlCheckbox = (TextView) getActivity().findViewById(R.id.auswah);
+                // get selected radio button from radioGroup
+                int selectedId = radiogroupSex.getCheckedRadioButtonId();
+                // find the radiobutton by returned id
+                radioSexButton = (RadioButton) getActivity().findViewById(selectedId);
+                Toast.makeText(getContext(), radioSexButton.getText(), Toast.LENGTH_SHORT).show();
+                AuswahlCheckbox.setText(radioSexButton.getText());
+
+
+                new BackgroundTask("bester.php",dropdown.getSelectedItem().toString(),dropdownU.getSelectedItem().toString(), radioSexButton.getText().toString() ).execute();
+            }
+        });
+
+        // Inflate the layout for this fragment
+        return activeLayout2;
     }
+    //Male Female Button Contr
 
     class BackgroundTask extends AsyncTask<Void, Void, String> {
 
@@ -117,13 +120,15 @@ public class StatistikFragment extends Fragment {
         String JSON_STRING;
         String klasse;
         String unterklasse;
+        String geschlecht;
 
 
-        public BackgroundTask(String befehl, String klasse, String unterklasse){
+        public BackgroundTask(String befehl, String klasse, String unterklasse, String geschlecht){
 
             this.befehl= befehl;
             this.klasse = klasse;
             this.unterklasse= unterklasse;
+            this.geschlecht = geschlecht;
 
         }
 
@@ -133,7 +138,7 @@ public class StatistikFragment extends Fragment {
 
         @Override
         protected String doInBackground(Void... voids) {
-            json_url ="http://91.67.242.37/" + befehl+"?klasse="+klasse+"&unterklasse="+unterklasse;
+            json_url ="http://91.67.242.37/" + befehl+"?klasse="+klasse+"&unterklasse="+unterklasse + "&geschlecht=" + geschlecht;
 
             try {
                 URL url = new URL(json_url);
