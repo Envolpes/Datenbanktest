@@ -11,10 +11,9 @@ import android.widget.FrameLayout;
 
 public class Home extends Menue {
 
-    //private Button btnDisziplin, btnStatistik;
+    //Deklaration der Variablen
     private BottomNavigationView main_nav;
     private FrameLayout main_frame;
-
     private DisziplinFragment dizFragm;
     private StatistikFragment statFragm;
 
@@ -23,17 +22,21 @@ public class Home extends Menue {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //Toolbar einfügen, aber nicht mit der methode aus der classe Menue, da dort auch der zurückbutten eingefügt wird der hier aber nicht gebraucht wird
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBasis);
         setSupportActionBar(toolbar);
 
+
+        //Refernziern der zwei frames
         main_frame = (FrameLayout) findViewById(R.id.main_frame);
         main_nav = (BottomNavigationView) findViewById(R.id.main_nav);
 
+        //Initialisieren der Fragments und setzten des initialen Fragments
         dizFragm = new DisziplinFragment();
         statFragm = new StatistikFragment();
-
         setFragment(dizFragm);
 
+        //Handling der bottom navbar
         main_nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -56,6 +59,7 @@ public class Home extends Menue {
         });
     }
     private void setFragment(Fragment fragment) {
+        //Je nach dem was in der navbar ausgewält wird, wird in den main frame das entsprechende Fragment geladen
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_frame, fragment);
         fragmentTransaction.commit();

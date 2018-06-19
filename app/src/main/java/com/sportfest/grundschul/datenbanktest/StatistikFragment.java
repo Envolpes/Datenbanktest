@@ -41,7 +41,7 @@ public class StatistikFragment extends Fragment {
     Button btnBester, btnBesteSpruenge;
     RadioGroup radiogroupSex;
     RadioButton radioSexButton;
-    TextView AuswahlCheckbox;
+    TextView AuswahlCheckbox, txt_Überschrift;
     Spinner dropdown, dropdownU;
 
     public StatistikFragment() {
@@ -54,7 +54,10 @@ public class StatistikFragment extends Fragment {
         //Zuweisung von allen Buttons / DropDowns/ etc...
         View activeLayout2 = inflater.inflate(R.layout.fragment_statistik, container, false);
 
+        //Abholen der zuletzt ausgewählten Dropdownauswahlen
         SharedPreferences SpinnerAuswahl = getActivity().getSharedPreferences("AuswahlSpinner", 0);
+
+        txt_Überschrift = activeLayout2.findViewById(R.id.txt_uberschrift);
 
         dropdown = (Spinner) activeLayout2.findViewById(R.id.btnDropdownKlassen);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.DropdownKlassenStatistik));
@@ -71,6 +74,8 @@ public class StatistikFragment extends Fragment {
         btnBester = activeLayout2.findViewById(R.id.btnWeitsprung_Bester);
         btnBesteSpruenge = activeLayout2.findViewById(R.id.btnWeitsprung_Beste);
 
+
+        //OnClicktlistener der Buttons
         btnBesteSpruenge.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -83,6 +88,8 @@ public class StatistikFragment extends Fragment {
                 int selectedId = radiogroupSex.getCheckedRadioButtonId();
                 // find the radiobutton by returned id
                 radioSexButton = (RadioButton) getActivity().findViewById(selectedId);
+                txt_Überschrift.setText("Beste Sprünge");
+
 
                 //Aufruf der Background Task
                 new BackgroundTask("beste_sprunge.php", dropdown.getSelectedItem().toString(), dropdownU.getSelectedItem().toString(), radioSexButton.getText().toString()).execute();
@@ -100,7 +107,7 @@ public class StatistikFragment extends Fragment {
                 int selectedId = radiogroupSex.getCheckedRadioButtonId();
                 // find the radiobutton by returned id
                 radioSexButton = (RadioButton) getActivity().findViewById(selectedId);
-
+                txt_Überschrift.setText("Bester Sprung");
                 //Aufruf der Background Task
                 new BackgroundTask("bester.php", dropdown.getSelectedItem().toString(), dropdownU.getSelectedItem().toString(), radioSexButton.getText().toString()).execute();
             }
@@ -229,6 +236,7 @@ public class StatistikFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
         }
     }
 

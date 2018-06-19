@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class Menue extends AppCompatActivity {
-
+//Das hier ist die Menuü-Activity von der alle anderen Activities erben um ein einheitlichen Menü imm anzuzeigen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +25,7 @@ public class Menue extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        //handling der drei Auswahlmöglichkeiten des Menüs
         switch (item.getItemId()){
             case R.id.Logout:
                 Intent goToMainActivity = new Intent(getApplicationContext(), Login.class);
