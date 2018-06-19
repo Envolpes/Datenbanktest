@@ -100,7 +100,7 @@ public class Login extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... voids) {
             //URL ändern
-            json_url ="http://91.67.242.37/login_check.php?" +"benutzername="+ benutzername + "&pw=" + pw;
+            json_url ="http://91.67.242.37/check_login.php?" +"name="+ benutzername + "&pw=" + pw;
 
             try {
                 URL url = new URL(json_url);
