@@ -17,161 +17,215 @@
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/toolbarBasis">
 
-
-        <EditText
-            android:id="@+id/Satz1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="145dp"
+            android:layout_height="137dp"
+            android:layout_alignParentEnd="true"
             android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:ems="10"
-            android:hint="Sprung1"
-            android:inputType="numberDecimal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Nummer" />
+            app:srcCompat="@mipmap/ic_launcher_round"
+            tools:layout_editor_absoluteY="16dp" />
 
-        <EditText
-            android:id="@+id/Satz2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="Sprung2"
-            android:inputType="numberDecimal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Satz1" />
-
-        <EditText
-            android:id="@+id/Satz3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="Sprung3"
-            android:inputType="numberDecimal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Satz2" />
-
-        <Button
-            android:id="@+id/springen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:text="Schicken"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Satz3" />
-
-        <TextView
-            android:id="@+id/Name"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="16dp"
-            android:text="TextView"
-            android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/textView5"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/klasse"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            android:text="Text"
-            android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/Name" />
-
-        <TextView
-            android:id="@+id/unterklasse"
-            android:layout_width="82dp"
-            android:layout_height="27dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="TextView"
-            android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/klasse"
-            app:layout_constraintTop_toBottomOf="@+id/Name" />
-
-        <TextView
-            android:id="@+id/Nummer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            android:text="TextView"
-            android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/unterklasse" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:text="Name:"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="16dp" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:text="Klasse:"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="16dp" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:text="Nummer:"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="16dp" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="335dp"
-            android:layout_height="78dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/springen"
-            tools:layout_editor_absoluteX="18dp" />
-
-        <TextView
-            android:id="@+id/Änderung"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="TextView"
+            android:layout_marginTop="40dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/Name"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+            <TextView
+                android:id="@+id/Änderung"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/springen" />
+
+            <EditText
+                android:id="@+id/Satz1"
+                android:layout_width="232dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:ems="10"
+                android:hint="Sprung1"
+                android:inputType="numberDecimal"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/Satz2"
+                android:layout_width="232dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="Sprung2"
+                android:inputType="numberDecimal"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Satz1" />
+
+            <EditText
+                android:id="@+id/Satz3"
+                android:layout_width="232dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="Sprung3"
+                android:inputType="numberDecimal"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Satz2" />
+
+            <Button
+                android:id="@+id/springen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@android:color/holo_green_light"
+                android:text="Speichern"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Satz3" />
+
+            <TextView
+                android:id="@+id/EinheitSprung1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="36dp"
+                android:text="cm"
+                android:textSize="30sp"
+                app:layout_constraintStart_toEndOf="@+id/Satz3"
+                app:layout_constraintTop_toBottomOf="@+id/einheitSprung2" />
+
+            <TextView
+                android:id="@+id/einheitSprung2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:text="cm"
+                android:textSize="30sp"
+                app:layout_constraintStart_toEndOf="@+id/Satz2"
+                app:layout_constraintTop_toBottomOf="@+id/einheitSprung" />
+
+            <TextView
+                android:id="@+id/einheitSprung"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="cm"
+                android:textSize="30sp"
+                app:layout_constraintStart_toEndOf="@+id/Satz1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/Name"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                android:text="TextView"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/textView5"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/klasse"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="16dp"
+                android:text="Text"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/textView6"
+                app:layout_constraintTop_toBottomOf="@+id/Name" />
+
+            <TextView
+                android:id="@+id/unterklasse"
+                android:layout_width="82dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="TextView"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/klasse"
+                app:layout_constraintTop_toBottomOf="@+id/Name" />
+
+            <TextView
+                android:id="@+id/Nummer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="16dp"
+                android:text="TextView"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/textView8"
+                app:layout_constraintTop_toBottomOf="@+id/unterklasse" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:text="Name:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:text="Klasse:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/textView5"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:text="Nummer:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/textView6"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="16dp" />
+
+        </android.support.constraint.ConstraintLayout>
+
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
