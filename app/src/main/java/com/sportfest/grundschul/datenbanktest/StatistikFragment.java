@@ -143,7 +143,7 @@ public class StatistikFragment extends Fragment {
 
         @Override
         protected String doInBackground(Void... voids) {
-            json_url = "http://91.67.242.37/" + befehl + "?klasse=" + klasse + "&unterklasse=" + unterklasse + "&geschlecht=" + geschlecht;
+            json_url = "http://91.67.234.134/" + befehl + "?klasse=" + klasse + "&unterklasse=" + unterklasse + "&geschlecht=" + geschlecht;
 
             try {
                 URL url = new URL(json_url);

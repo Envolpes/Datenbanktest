@@ -146,7 +146,7 @@ public class DisziplinFragment extends Fragment {
         @Override
         protected String doInBackground(Void... voids) {
             //Hier wird die JSON-URL aufgebaut
-            json_url = "http://91.67.242.37/json_get_data_schulklasse.php?klasse=" + Klasse + "&unterklasse=" + UnterKlasse;
+            json_url = "http://91.67.234.134/json_get_data_schulklasse.php?klasse=" + Klasse + "&unterklasse=" + UnterKlasse;
             try {
 
                 //URL Link wir genutzt, um HTTP Connection herzustellen

@@ -42,7 +42,7 @@ public class SprungEingabe extends Menue {
     RequestQueue requestQueue;
 
     //URL Location
-    String insertURL = "http://91.67.242.37/json_insert.php";
+    String insertURL = "http://91.67.234.134//json_insert.php";
 
 
     //String JSON_Text;//nicht nötig
@@ -110,7 +110,7 @@ public class SprungEingabe extends Menue {
 
         @Override
         protected String doInBackground(Void... voids) {
-            json_url = "http://91.67.242.37/sprungabfrage.php?Springer=" + Nummer;
+            json_url = "http://91.67.234.134/sprungabfrage.php?Springer=" + Nummer;
 
             try {
 
