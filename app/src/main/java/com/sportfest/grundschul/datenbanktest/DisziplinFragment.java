@@ -213,8 +213,10 @@ public class DisziplinFragment extends Fragment {
                     klasse = JO.getString("klasse");
                     unterklasse = JO.getString("unterklasse");
                     name = JO.getString("name");
+                    //Hier werden die Daten in eigene Instanz personenDaten gespeichert
                     PersonenDaten personenDaten = new PersonenDaten(nummer, klasse, unterklasse, name);
 
+                    //um daraufhin mithilfe des datenAdapter die Daten in die Liste view zu schreiben
                     datenAdapter.add(personenDaten);
 
                     count++;
