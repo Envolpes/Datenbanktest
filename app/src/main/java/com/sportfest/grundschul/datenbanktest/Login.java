@@ -85,14 +85,21 @@ public class Login extends AppCompatActivity {
                 //Auflösen der URL in HTTP und Aufbau eines String-Builders
                 URL url = new URL(json_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                //List den Inhalt des Inhaltes des httpURLConnection
                 InputStream inputStream = httpURLConnection.getInputStream();
+
+                //Liest den Text aus dem Input Stream als ganzes
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+                //Inhalt könnte ohne String Builder nicht geändert werden können
                 StringBuilder stringBuilder = new StringBuilder();
                 while ((JSON_STRING = bufferedReader.readLine()) != null) {
 
                     stringBuilder.append(JSON_STRING + "\n");
                 }
 
+                //Schließen von allem.
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
